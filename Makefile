@@ -9,7 +9,9 @@ run-flask:
 	flask run --host 127.0.0.1 --port 8000
 run-gunicorn:
 	gunicorn -b 127.0.01:8000 app:app
-# pip
+# venv
+venv:
+	python3 -m venv venv
 pip-install:
 	pip install -r requirements.txt
 pip-freeze:
