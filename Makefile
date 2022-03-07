@@ -19,7 +19,7 @@ run-docker:
 	sudo docker-compose up
 # wsgi
 run-flask:
-	flask run --host $(HOST) --port $(PORT)
+	FLASK_ENV=development flask run --host $(HOST) --port $(PORT)
 run-gunicorn:
 	gunicorn -b $(HOST):$(PORT) app:app
 # postgres

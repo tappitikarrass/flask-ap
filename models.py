@@ -1,12 +1,12 @@
-from sqlalchemy import (Column, Integer, String, create_engine)
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import (Column, Integer, String)
 from sqlalchemy.sql.sqltypes import TEXT
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
 
+BaseModel = declarative_base()
 engine = create_engine("postgresql://postgres:bePG2jqRxmRZiz@localhost/appdb")
 engine.connect()
-
-BaseModel = declarative_base()
 SessionFactory = sessionmaker(bind=engine)
 Session = scoped_session(SessionFactory)
 session = Session()
@@ -23,15 +23,3 @@ class User(BaseModel):
     password    = Column("password", TEXT, nullable=False, unique=False)
 
 BaseModel.metadata.create_all(engine)
-
-user1 = User(id=1,
-             username="abobus",
-             firstname="a",
-             lastname="b",
-             email="c@c.com",
-             phone="1234",
-             password="vitalik"
-             )
-
-user1 = session.add(user1)
-session.commit()
