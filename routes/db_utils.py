@@ -1,7 +1,11 @@
 from functools import wraps
+from flask import jsonify, request
+from flask_bcrypt import Bcrypt
+
 from models import session
-from flask import jsonify
-from models import session
+from schemas import (UserSchema)
+
+bcrypt = Bcrypt()
 
 def session_lifecycle(func):
     @wraps(func)
@@ -15,12 +19,13 @@ def session_lifecycle(func):
             raise e
     return wrapper
 
+# POST
 @session_lifecycle
 def post_entry(model_class, model_schema, **kwargs):
     entry = model_class(**kwargs)
     session.add(entry)
     return jsonify(model_schema().dump(entry))
-
+# GET
 @session_lifecycle
 def get_entries(model_class, model_schema):
     entries = session.query(model_class).all()
@@ -39,3 +44,29 @@ def get_entry_by_username(model_class, model_schema, username):
     if entry is None:
         raise InvalidUsage("Object not found", status_code=404)
     return jsonify(model_schema().dump(entry))
+# DELETE
+@session_lifecycle
+def delete_entry_by_id(model_class, model_schema, id):
+    entry = session.query(model_class).filter_by(id=id).first()
+    if entry is None:
+        raise InvalidUsage("Object not found", status_code=404)
+    session.delete(entry)
+    return jsonify(model_schema().dump(entry))
+# PUT
+@session_lifecycle
+def update_entry_by_id(model_class, model_schema, id, **kwargs):
+    entry = session.query(model_class).filter_by(id=id).first()
+    if entry is None:
+        raise InvalidUsage("Object not found", status_code=404)
+    for key, value in kwargs.items():
+        setattr(entry, key, value)
+    if entry.id != id:
+        raise InvalidUsage("Object not found", status_code=404)
+    return jsonify(model_schema().dump(entry))
+# UTILS
+def generate_password_hash(request_json):
+    user_data = UserSchema().load(request_json)
+    pwd = request.json.get("password", None)
+    pwd_hash = bcrypt.generate_password_hash(pwd).decode("utf-8")
+    user_data.update({"password": pwd_hash})
+    return user_data

@@ -2,6 +2,8 @@ POSTGRES_PASSWORD=bePG2jqRxmRZiz
 HOST=127.0.0.1
 PORT=8000
 
+curl:
+	sh curl.sh
 # alembic
 alembic-reload:
 	alembic downgrade base
