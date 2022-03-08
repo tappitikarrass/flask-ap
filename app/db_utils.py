@@ -1,20 +1,18 @@
 from functools import wraps
 from flask import jsonify, request
 
-from .models import session
 from .schemas import (UserSchema)
-from . import bcrypt
-
+from . import (bcrypt, db)
 
 def session_lifecycle(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
             res = func(*args, **kwargs)
-            session.commit()
+            db.session.commit()
             return res
         except Exception as e:
-            session.rollback()
+            db.session.rollback()
             raise e
     return wrapper
 
@@ -27,26 +25,26 @@ def post_entry(model_class, model_schema, **kwargs):
 # GET
 @session_lifecycle
 def get_entries(model_class, model_schema):
-    entries = session.query(model_class).all()
+    entries = db.session.query(model_class).all()
     return jsonify(model_schema(many=True).dump(entries))
 
 @session_lifecycle
 def get_entry_by_id(model_class, model_schema, id):
-    entry = session.query(model_class).filter_by(id=id).first()
+    entry = db.session.query(model_class).filter_by(user_id=id).first()
     if entry is None:
         raise InvalidUsage("Object not found", status_code=404)
     return jsonify(model_schema().dump(entry))
 
 @session_lifecycle
 def get_entry_by_username(model_class, model_schema, username):
-    entry = session.query(model_class).filter_by(username=username).first()
+    entry = db.session.query(model_class).filter_by(username=username).first()
     if entry is None:
         raise InvalidUsage("Object not found", status_code=404)
     return jsonify(model_schema().dump(entry))
 # DELETE
 @session_lifecycle
 def delete_entry_by_id(model_class, model_schema, id):
-    entry = session.query(model_class).filter_by(id=id).first()
+    entry = db.session.query(model_class).filter_by(user_id=id).first()
     if entry is None:
         raise InvalidUsage("Object not found", status_code=404)
     session.delete(entry)
@@ -54,12 +52,12 @@ def delete_entry_by_id(model_class, model_schema, id):
 # PUT
 @session_lifecycle
 def update_entry_by_id(model_class, model_schema, id, **kwargs):
-    entry = session.query(model_class).filter_by(id=id).first()
+    entry = db.session.query(model_class).filter_by(user_id=id).first()
     if entry is None:
         raise InvalidUsage("Object not found", status_code=404)
     for key, value in kwargs.items():
         setattr(entry, key, value)
-    if entry.id != id:
+    if entry.user_id != id:
         raise InvalidUsage("Object not found", status_code=404)
     return jsonify(model_schema().dump(entry))
 # UTILS

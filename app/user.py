@@ -1,16 +1,18 @@
+from datetime import (datetime, timezone, timedelta)
+
 from flask import Blueprint, request
 from flask.json import jsonify
 from flask_jwt_extended import (create_access_token)
-from flask_jwt_extended import (jwt_required, create_access_token, get_jwt_identity)
+from flask_jwt_extended import (jwt_required, create_access_token, get_jwt_identity, get_jwt)
 
-from .models import (User)
+from .models import (User, TokenBlocklist)
 from .schemas import (UserSchema)
 from .db_utils import (get_entries, get_entry_by_id, get_entry_by_username)
 from .db_utils import (post_entry)
 from .db_utils import (update_entry_by_id)
 from .db_utils import (delete_entry_by_id)
 from .db_utils import (generate_password_hash)
-from . import (bcrypt)
+from . import (bcrypt, jwt, db)
 
 bp_user = Blueprint(name="bp_user", import_name=__name__)
 
@@ -62,7 +64,17 @@ def user_by_id(id):
             return delete_entry_by_id(User, UserSchema, id), 200
     return jsonify(403), 403
 
-@bp_user.route("/logout", methods=["POST"])
+@jwt.token_in_blocklist_loader
+def check_if_token_revoked(jwt_header, jwt_payload):
+    jti = jwt_payload["jti"]
+    token = db.session.query(TokenBlocklist.token_id).filter_by(jti=jti).scalar()
+    return token is not None
+
+@bp_user.route("/logout", methods=["DELETE"])
 @jwt_required()
 def logout():
-    return jsonify(200), 200
+    jti = get_jwt()["jti"]
+    now = datetime.now(timezone.utc)
+    db.session.add(TokenBlocklist(jti=jti, created_at=now))
+    db.session.commit()
+    return jsonify(msg="JWT revoked"), 200
