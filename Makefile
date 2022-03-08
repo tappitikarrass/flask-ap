@@ -2,6 +2,10 @@ POSTGRES_PASSWORD=bePG2jqRxmRZiz
 HOST=127.0.0.1
 PORT=8000
 
+# alembic
+alembic-reload:
+	alembic downgrade base
+	alembic upgrade head
 # venv
 venv:
 	python3 -m venv venv

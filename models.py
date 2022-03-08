@@ -14,7 +14,7 @@ session = Session()
 class User(BaseModel):
     __tablename__ = "user"
 
-    id          = Column("user_id", Integer, nullable=False, primary_key=True)
+    id          = Column("user_id", Integer, nullable=True, primary_key=True)
     username    = Column("username", String, nullable=False, unique=True)
     firstname   = Column("firstname", String, nullable=True, unique=False)
     lastname    = Column("lastname", String, nullable=True, unique=False)
@@ -22,4 +22,4 @@ class User(BaseModel):
     phone       = Column("phone", String, nullable=True, unique=True)
     password    = Column("password", TEXT, nullable=False, unique=False)
 
-BaseModel.metadata.create_all(engine)
+# BaseModel.metadata.create_all(engine)
