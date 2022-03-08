@@ -3,13 +3,14 @@ from flask.json import jsonify
 from flask_jwt_extended import (create_access_token)
 from flask_jwt_extended import (jwt_required, create_access_token, get_jwt_identity)
 
-from models import (User)
-from schemas import (UserSchema)
+from .models import (User)
+from .schemas import (UserSchema)
 from .db_utils import (get_entries, get_entry_by_id, get_entry_by_username)
 from .db_utils import (post_entry)
-from .db_utils import (delete_entry_by_id)
 from .db_utils import (update_entry_by_id)
-from .db_utils import (generate_password_hash, bcrypt)
+from .db_utils import (delete_entry_by_id)
+from .db_utils import (generate_password_hash)
+from . import (bcrypt)
 
 bp_user = Blueprint(name="bp_user", import_name=__name__)
 

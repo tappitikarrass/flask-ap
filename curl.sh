@@ -64,7 +64,7 @@ update_user_by_id() {
 }
 
 # post_user_1
-post_user_2
+# post_user_2
 # login_user sbandera1 supersecret
 # login_user ivanfranko ukraina
 # login_user tarassh ukraina

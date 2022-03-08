@@ -1,11 +1,10 @@
 from functools import wraps
 from flask import jsonify, request
-from flask_bcrypt import Bcrypt
 
-from models import session
-from schemas import (UserSchema)
+from .models import session
+from .schemas import (UserSchema)
+from . import bcrypt
 
-bcrypt = Bcrypt()
 
 def session_lifecycle(func):
     @wraps(func)
