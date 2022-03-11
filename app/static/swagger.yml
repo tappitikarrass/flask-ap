@@ -1,0 +1,256 @@
+openapi: 3.0.1
+info:
+  title: Anime Catalogue
+  description: >-
+    This is a anime catalogue api   
+  termsOfService: http://example.com/terms/
+  contact:
+    email: example@company.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+tags:
+  - name: list
+    description: Access anime lists
+  - name: user
+    description: Access users
+paths:
+  /user:
+    get:
+      tags:
+        - user
+      summary: Get users list
+      operationId: getUsersList
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      tags:
+        - user
+      summary: Create user
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+      x-codegen-request-body-name: body
+  /login:
+    post:
+      tags:
+        - user
+      summary: Login user
+      operationId: loginUser
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - basicAuth: []
+  /logout:
+    delete:
+      tags:
+        - user
+      summary: Logout current user
+      operationId: logoutUser
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    default: JWT Revoked
+        '401':
+          description: Unauthorized
+        '422':
+          description: Bad Authorization Header
+      security:
+        - bearerAuth: []
+  /user/{user_id}:
+    get:
+      tags:
+        - user
+      summary: Get user by username
+      operationId: getUserById
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Bad Authorization Header
+      security:
+        - bearerAuth: []
+    put:
+      tags:
+        - user
+      summary: Update user by id
+      operationId: updateUserById
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updated user object
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Bad Authorization Header
+      x-codegen-request-body-name: body
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - user
+      summary: Delete user by id
+      operationId: deleteUserById
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: User not found
+        '422':
+          description: Bad Authorization Header
+      security:
+        - bearerAuth: []
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          format: int64
+          default: 1
+        username:
+          type: string
+          default: "ivanfranko"
+        firstname:
+          type: string
+          default: "Ivan"
+        lastname:
+          type: string
+          default: "Franko"
+        email:
+          type: string
+          default: "franko@liamg.com"
+        phone:
+          type: string
+          default: "321"
+        password:
+          type: string
+          default: "ukraina"
+      xml:
+        name: User
+    Admin:
+      type: object
+      properties:
+        admin_id:
+          type: integer
+          format: int64
+        user_id:
+          type: integer
+          format: int64
+      xml:
+        name: Admin
+    List:
+      type: object
+      properties:
+        list_id:
+          type: integer
+          format: int64
+        anime_id:
+          type: integer
+          format: int64
+      xml:
+        name: List
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    basicAuth:
+      type: http
+      scheme: basic
