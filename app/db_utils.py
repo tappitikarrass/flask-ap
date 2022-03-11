@@ -20,7 +20,7 @@ def session_lifecycle(func):
 @session_lifecycle
 def post_entry(model_class, model_schema, **kwargs):
     entry = model_class(**kwargs)
-    session.add(entry)
+    db.session.add(entry)
     return jsonify(model_schema().dump(entry))
 # GET
 @session_lifecycle

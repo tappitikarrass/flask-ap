@@ -63,14 +63,21 @@ update_user_by_id() {
             "password": "ukraina"}'
 }
 
+# $1 - tocken
+logout_user() {
+    curl -X DELETE "$URL/logout" \
+        -H "Authorization: Bearer $1"
+}
+
+TOKEN1=""
+TOKEN2=""
+TOKEN3=""
 # post_user_1
 # post_user_2
-# login_user sbandera1 supersecret
 # login_user ivanfranko ukraina
 # login_user tarassh ukraina
-# get_user_by_id 1
-TOKEN1=""
-# get_user_by_id 2 $TOKEN1
-# delete_user_by_id 2 $TOKEN1
-# update_user_by_id 2 $TOKEN1
+
+# login_user sbandera1 supersecret
+# get_user_by_id 1 $TOKEN1
+# logout_user $TOKEN1
 # get_user_by_id 1 $TOKEN1
