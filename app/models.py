@@ -11,6 +11,28 @@ class User(db.Model):
     phone = db.Column(db.String, nullable=True, unique=True)
     password = db.Column(db.TEXT, nullable=False, unique=False)
 
+class List(db.Model):
+    list_id = db.Column(db.Integer, nullable=True, primary_key=True)
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey("user.user_id"),
+                        nullable=False,
+                        unique=False)
+    name = db.Column(db.String, nullable=False, unique=False)
+
+class ListAnime(db.Model):
+    list_id = db.Column(db.Integer,
+                        db.ForeignKey("list.list_id")
+                        nullable=False,
+                        unique=False)
+    mal_id = db.Column(db.Integer, nullable=True, unique=False)
+
+class Admin(db.Model):
+    admin_id = db.Column(db.Integer, nullable=True, primary_key=True)
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey("user.user_id"),
+                        nullable=False,
+                        unique=True)
+
 class TokenBlocklist(db.Model):
     token_id = db.Column(db.Integer, nullable=True, primary_key=True)
     jti = db.Column(db.String(36), nullable=False, unique=True)
