@@ -27,34 +27,32 @@ def post_entry(model_class, model_schema, **kwargs):
 def get_entries(model_class, model_schema):
     entries = db.session.query(model_class).all()
     return jsonify(model_schema(many=True).dump(entries))
-
 @session_lifecycle
 def get_entry_by_id(model_class, model_schema, id):
     entry = db.session.query(model_class).filter_by(user_id=id).first()
     if entry is None:
-        raise InvalidUsage("Object not found", status_code=404)
+        return None
     return jsonify(model_schema().dump(entry))
-
 @session_lifecycle
 def get_entry_by_username(model_class, model_schema, username):
     entry = db.session.query(model_class).filter_by(username=username).first()
     if entry is None:
-        raise InvalidUsage("Object not found", status_code=404)
+        return None
     return jsonify(model_schema().dump(entry))
 # DELETE
 @session_lifecycle
 def delete_entry_by_id(model_class, model_schema, id):
     entry = db.session.query(model_class).filter_by(user_id=id).first()
     if entry is None:
-        raise InvalidUsage("Object not found", status_code=404)
-    session.delete(entry)
+        return None
+    db.session.delete(entry)
     return jsonify(model_schema().dump(entry))
 # PUT
 @session_lifecycle
 def update_entry_by_id(model_class, model_schema, id, **kwargs):
     entry = db.session.query(model_class).filter_by(user_id=id).first()
     if entry is None:
-        raise InvalidUsage("Object not found", status_code=404)
+        return None
     for key, value in kwargs.items():
         setattr(entry, key, value)
     if entry.user_id != id:
