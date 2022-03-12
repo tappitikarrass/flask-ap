@@ -25,7 +25,7 @@ def upgrade():
                                 ondelete="CASCADE"
                                 ),
                   nullable=False,
-                  unique=True),
+                  unique=False),
         sa.Column("name", sa.String, nullable=False, unique=False)
     )
     op.create_table("list_anime",

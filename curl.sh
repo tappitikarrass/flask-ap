@@ -69,14 +69,13 @@ logout_user() {
         -H "Authorization: Bearer $1"
 }
 
-TOKEN1="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0NzAyMTA0OSwianRpIjoiZWEwODgzODItNjBjYS00ZmVlLTg4ODQtM2M3NDU4NjlmYjJiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Iml2YW5mcmFua28iLCJuYmYiOjE2NDcwMjEwNDksImV4cCI6MTY0NzAyMTk0OX0.qUaeBiVixj8dJQSn-uZAz3bigB2EyvKm8HzsfLxtA5o"
+TOKEN1=""
 TOKEN2=""
 TOKEN3=""
-# post_user_1
-# post_user_2
+post_user_1
+post_user_2
 # login_user ivanfranko ukraina
 # get_user_by_id 2 $TOKEN1
 # logout_user $TOKEN1
 # delete_user_by_id 2 $TOKEN1
 # get_user_by_id 2 $TOKEN1
-get_users
