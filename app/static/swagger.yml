@@ -18,12 +18,142 @@ tags:
   - name: user
     description: Access users
 paths:
+# LIST
+  /list:
+    get:
+      tags:
+        - list
+      summary: Get lists
+      operationId: getLists
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/List'
+    post:
+      tags:
+        - list
+      summary: Create list
+      operationId: createList
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/List'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List'
+        '400':
+          description: Bad Request
+      x-codegen-request-body-name: body
+  /list/{list_id}:
+    get:
+      tags:
+        - list
+      summary: Get list by id
+      operationId: getListById
+      parameters:
+        - name: list_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Bad Authorization Header
+      security:
+        - bearerAuth: []
+    put:
+      tags:
+        - list
+      summary: Update list by id
+      operationId: updateListById
+      parameters:
+        - name: list_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/List'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Bad Authorization Header
+      x-codegen-request-body-name: body
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - list
+      summary: Delete list by id
+      operationId: deleteListById
+      parameters:
+        - name: list_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: User not found
+        '422':
+          description: Bad Authorization Header
+      security:
+        - bearerAuth: []
+# USER
   /user:
     get:
       tags:
         - user
-      summary: Get users list
-      operationId: getUsersList
+      summary: Get users
+      operationId: getUsers
       responses:
         '200':
           description: OK
@@ -39,7 +169,6 @@ paths:
       summary: Create user
       operationId: createUser
       requestBody:
-        description: Created user object
         content:
           'application/json':
             schema:
@@ -83,7 +212,7 @@ paths:
     delete:
       tags:
         - user
-      summary: Logout current user
+      summary: Logout user
       operationId: logoutUser
       responses:
         '200':
@@ -106,7 +235,7 @@ paths:
     get:
       tags:
         - user
-      summary: Get user by username
+      summary: Get user by id
       operationId: getUserById
       parameters:
         - name: user_id
@@ -143,7 +272,6 @@ paths:
           schema:
             type: string
       requestBody:
-        description: Updated user object
         content:
           'application/json':
             schema:
@@ -241,9 +369,11 @@ components:
         list_id:
           type: integer
           format: int64
-        anime_id:
+        user_id:
           type: integer
           format: int64
+        name:
+          type: string
       xml:
         name: List
   securitySchemes:

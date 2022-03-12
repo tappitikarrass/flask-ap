@@ -12,7 +12,7 @@ from .db_utils import (
     get_entry_by_username,
     post_entry,
     update_entry_by_id,
-    delete_entry_by_id
+    delete_entry_by_id,
     generate_password_hash
 )
 from .models import (User, TokenBlocklist)

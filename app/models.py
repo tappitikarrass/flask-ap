@@ -20,8 +20,9 @@ class List(db.Model):
     name = db.Column(db.String, nullable=False, unique=False)
 
 class ListAnime(db.Model):
+    dummy_id = db.Column(db.Integer, nullable=True, primary_key=True)
     list_id = db.Column(db.Integer,
-                        db.ForeignKey("list.list_id")
+                        db.ForeignKey("list.list_id"),
                         nullable=False,
                         unique=False)
     mal_id = db.Column(db.Integer, nullable=True, unique=False)

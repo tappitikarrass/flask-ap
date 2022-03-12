@@ -29,6 +29,7 @@ def upgrade():
         sa.Column("name", sa.String, nullable=False, unique=False)
     )
     op.create_table("list_anime",
+        sa.Column("dummy_id", sa.Integer, nullable=False, primary_key=True),
         sa.Column("list_id", sa.Integer,
                   sa.ForeignKey("list.list_id",
                                 onupdate="CASCADE",
