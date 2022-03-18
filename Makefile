@@ -6,9 +6,11 @@ PORT=8000
 
 curl:
 	sh curl.sh
-alembic-reload:
+alembic:
 	alembic downgrade base
 	alembic upgrade head
+pytest:
+	pytest --cov=app tests
 # venv
 venv:
 	python3 -m venv venv

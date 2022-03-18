@@ -1,7 +1,7 @@
 from functools import wraps
 from flask import jsonify, request
 
-from .schemas import (UserSchema, ListSchema)
+from .schemas import (UserSchema, ListSchema, ListAnimeSchema)
 from . import (bcrypt, db)
 
 def session_lifecycle(func):
@@ -29,7 +29,8 @@ def get_entries(model_class, model_schema):
     return jsonify(model_schema(many=True).dump(entries))
 @session_lifecycle
 def get_entry_by_id(model_class, model_schema, id):
-    entry = db.session.query(model_class).filter_by(user_id=id).first()
+    if model_schema == UserSchema:
+        entry = db.session.query(model_class).filter_by(user_id=id).first()
     if model_schema == ListSchema:
         entry = db.session.query(model_class).filter_by(list_id=id).first()
     if entry is None:
@@ -44,9 +45,12 @@ def get_entry_by_username(model_class, model_schema, username):
 # DELETE
 @session_lifecycle
 def delete_entry_by_id(model_class, model_schema, id):
-    entry = db.session.query(model_class).filter_by(user_id=id).first()
+    if model_schema == UserSchema:
+        entry = db.session.query(model_class).filter_by(user_id=id).first()
     if model_schema == ListSchema:
         entry = db.session.query(model_class).filter_by(list_id=id).first()
+    if model_schema == ListAnimeSchema:
+        entry = db.session.query(model_class).filter_by(mal_id=id).first()
     if entry is None:
         return None
     db.session.delete(entry)

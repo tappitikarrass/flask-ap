@@ -1,5 +1,6 @@
 from flask import (Blueprint, request, jsonify)
 from flask_jwt_extended import (jwt_required, get_jwt_identity)
+from mal import (Anime)
 from .db_utils import (
     get_entries,
     get_entry_by_id,
@@ -47,19 +48,32 @@ def post_list():
     except Exception as e:
         return jsonify(400), 400
 
-@bp_list.route("/list/<username>/<int:list_id>", methods=["GET", "PUT", "DELETE"])
-@jwt_required()
+@bp_list.route("/list/<username>/<int:list_id>", methods=["POST", "GET", "PUT", "DELETE"])
+# @jwt_required()
 def list_by_id(username, list_id):
-    cur_indentity = get_jwt_identity()
+    # cur_indentity = get_jwt_identity()
     list = get_entry_by_id(List, ListSchema, list_id)
     user = get_entry_by_username(User, UserSchema, username)
 
-    if username != cur_indentity:
-        return jsonify(403), 403
+    # if username != cur_indentity:
+    #     return jsonify(403), 403
     if list == None:
         return jsonify(404), 404
-    user_id = user.json.get("user_id", None)
+    # user_id = user.json.get("user_id", None)
 
+    if request.method == "POST":
+        try:
+            request_data = request.get_json()
+            anime_data = ListAnimeSchema().load(request_data)
+            list_animes = db.session.query(ListAnime).filter_by(list_id=list_id).all()
+            print(request_data["mal_id"])
+            for i in range(len(list_animes)):
+                print(list_animes[i].mal_id)
+                if request_data["mal_id"] == list_animes[i].mal_id:
+                    raise Exception
+            return post_entry(ListAnime, ListAnimeSchema, **anime_data), 200
+        except Exception as e:
+            return jsonify(400), 400
     if request.method == "GET":
         return list, 200
     if request.method == "PUT":
@@ -67,3 +81,25 @@ def list_by_id(username, list_id):
         return update_entry_by_id(List, ListSchema, list_id, **list_data), 200
     if request.method == "DELETE":
         return delete_entry_by_id(List, ListSchema, list_id), 200
+
+@bp_list.route("/list/<username>/<int:list_id>/<int:mal_id>", methods=["DELETE"])
+@jwt_required()
+def list_delete_entry(username, list_id, mal_id):
+    cur_indentity = get_jwt_identity()
+    if username != cur_indentity:
+        return jsonify(403), 403
+
+    list = get_entry_by_id(List, ListSchema, list_id)
+    user = get_entry_by_username(User, UserSchema, username)
+    user_id = user.json.get("user_id", None)
+    list_user_id = list.json.get("user_id", None)
+    if list_user_id != user_id:
+        return jsonify(404), 404
+
+    list_anime = db.session.query(ListAnime).filter_by(list_id=list_id).all()
+    for i in range(len(list_anime)):
+        print(list_anime[i].mal_id)
+        if list_anime[i].mal_id == mal_id and list_anime[i].list_id == list_id:
+            return delete_entry_by_id(ListAnime, ListAnimeSchema, mal_id), 200
+
+    return jsonify(404), 404

@@ -13,11 +13,39 @@ info:
 servers:
   - url: http://localhost:8000
 tags:
+  - name: anime
+    description: Add/Remove anime in lists
   - name: list
     description: Access anime lists
   - name: user
     description: Access users
 paths:
+# ANIME
+  /anime/{mal_id}:
+    get:
+      tags:
+        - anime
+      summary: Get anime info
+      operationId: getAnime
+      parameters:
+        - name: mal_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/List'
+        '403':
+          description: Forbidden
+      security:
+        - bearerAuth: []
 # LIST
   /list/{username}:
     get:
@@ -72,7 +100,79 @@ paths:
       x-codegen-request-body-name: body
       security:
         - bearerAuth: []
+  /list/{username}/{list_id}/{mal_id}:
+    get:
+      tags:
+        - list
+      summary: Remove anime from list
+      operationId: removeAnime
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: list_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: mal_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAnime'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Bad Authorization Header
+      security:
+        - bearerAuth: []
   /list/{username}/{list_id}:
+    post:
+      tags:
+        - list
+      summary: Add anime to list
+      operationId: addAnime
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: list_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAnime'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Bad Authorization Header
+      security:
+        - bearerAuth: []
     get:
       tags:
         - list
@@ -362,7 +462,6 @@ components:
       properties:
         user_id:
           type: integer
-          format: int64
           default: 1
         username:
           type: string
@@ -389,10 +488,8 @@ components:
       properties:
         admin_id:
           type: integer
-          format: int64
         user_id:
           type: integer
-          format: int64
       xml:
         name: Admin
     List:
@@ -408,6 +505,36 @@ components:
           type: string
       xml:
         name: List
+    ListAnime:
+      type: object
+      properties:
+        list_id:
+          type: integer
+        mal_id:
+          type: integer
+      xml:
+        name: ListAnime
+    Anime:
+      type: object
+      properties:
+        mal_id:
+          type: integer
+        title:
+          type: string
+        score:
+          type: float
+        genres:
+          type: array
+          items:
+            type: integer
+        duration:
+          type: string
+        rating:
+          type: string
+        image_url:
+          type: string
+      xml:
+        name: Anime
   securitySchemes:
     bearerAuth:
       type: http

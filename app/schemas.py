@@ -21,3 +21,12 @@ class ListAnimeSchema(Schema):
 class AdminSchema(Schema):
     admin_id = fields.Integer()
     user_id = fields.Integer()
+
+class AnimeSchema(Schema):
+    mal_id = fields.Integer()
+    title= fields.String()
+    score = fields.Float()
+    genres = fields.List(fields.String)
+    duration = fields.String()
+    rating = fields.String()
+    image_url = fields.String()
