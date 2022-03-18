@@ -8,15 +8,15 @@ from flask_jwt_extended import (
 )
 from .db_utils import (
     get_entries,
-    get_entry_by_id,
-    get_entry_by_username,
-    post_entry,
-    update_entry_by_id,
-    delete_entry_by_id,
-    generate_password_hash
+    entry_by_id,
+    get_user,
+    get_admin,
+    generate_password_hash,
+    get_json_field,
+    check_access
 )
-from .models import (User, TokenBlocklist)
-from .schemas import (UserSchema)
+from .models import (User, Admin, TokenBlocklist)
+from .schemas import (UserSchema, AdminSchema)
 from . import (bcrypt, jwt, db)
 
 bp_user = Blueprint(name="bp_user", import_name=__name__)
@@ -36,7 +36,7 @@ def login():
     except Exception:
         return jsonify(401), 401
 
-    user = get_entry_by_username(User, UserSchema, username)
+    user = get_user(username)
     if user == None:
         return jsonify(404), 404
     
@@ -58,33 +58,41 @@ def logout():
     db.session.commit()
     return jsonify(msg="JWT revoked"), 200
 
-@bp_user.route("/user", methods=["GET", "POST"])
-def user():
-    if request.method == "GET":
-        return get_entries(User, UserSchema), 200
-    if request.method == "POST":
-        try:
-            user_data = generate_password_hash(request.get_json())
-            return post_entry(User, UserSchema, **user_data), 200
-        except Exception as e:
-            return jsonify(400), 400
-
-@bp_user.route("/user/<int:id>", methods=["GET", "PUT", "DELETE"])
+@bp_user.route("/user", methods=["GET"])
 @jwt_required()
-def user_by_id(id):
+def get_users():
     cur_indentity = get_jwt_identity()
-    user = get_entry_by_id(User, UserSchema, id)
-
-    if username == cur_indentity:
+    user = get_user(cur_indentity)
+    admin = get_admin(get_json_field(user, "user_id"))
+    if admin is None:
         return jsonify(403), 403
+    return get_entries(User, UserSchema), 200
+
+@bp_user.route("/user", methods=["POST"])
+def post_user():
+    try:
+        user_data = generate_password_hash(request.get_json())
+        return entry_by_id("post", User, 0, **user_data), 200
+    except Exception as e:
+        return jsonify(400), 400
+
+@bp_user.route("/user/<int:user_id>", methods=["GET", "PUT", "DELETE"])
+@jwt_required()
+def user_by_id(user_id):
+    user = entry_by_id("get", User, user_id)
     if user == None:
         return jsonify(404), 404
-    username = user.json.get("username", None)
+
+    username = get_json_field(user, "username")
+    admin = get_admin(user_id)
+    if not check_access(get_jwt_identity(), username, admin):
+        return jsonify(403), 403
 
     if request.method == "GET":
         return user, 200
     if request.method == "PUT":
         user_data = generate_password_hash(request.get_json())
-        return update_entry_by_id(User, UserSchema, id, **user_data), 200
+        return entry_by_id("put", User, user_id, **user_data), 200
     if request.method == "DELETE":
-        return delete_entry_by_id(User, UserSchema, id), 200
+        logout()
+        return entry_by_id("delete", User, user_id), 200
