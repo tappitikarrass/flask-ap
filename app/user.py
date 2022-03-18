@@ -74,16 +74,17 @@ def user():
 def user_by_id(id):
     cur_indentity = get_jwt_identity()
     user = get_entry_by_id(User, UserSchema, id)
+
+    if username == cur_indentity:
+        return jsonify(403), 403
     if user == None:
         return jsonify(404), 404
     username = user.json.get("username", None)
 
-    if username == cur_indentity:
-        if request.method == "GET":
-            return user, 200
-        if request.method == "PUT":
-            user_data = generate_password_hash(request.get_json())
-            return update_entry_by_id(User, UserSchema, id, **user_data), 200
-        if request.method == "DELETE":
-            return delete_entry_by_id(User, UserSchema, id), 200
-    return jsonify(403), 403
+    if request.method == "GET":
+        return user, 200
+    if request.method == "PUT":
+        user_data = generate_password_hash(request.get_json())
+        return update_entry_by_id(User, UserSchema, id, **user_data), 200
+    if request.method == "DELETE":
+        return delete_entry_by_id(User, UserSchema, id), 200

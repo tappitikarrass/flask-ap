@@ -19,12 +19,18 @@ tags:
     description: Access users
 paths:
 # LIST
-  /list:
+  /list/{username}:
     get:
       tags:
         - list
-      summary: Get lists
+      summary: Get lists by username
       operationId: getLists
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -34,6 +40,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/List'
+        '403':
+          description: Forbidden
+      security:
+        - bearerAuth: []
+  /list:
     post:
       tags:
         - list
@@ -54,14 +65,25 @@ paths:
                 $ref: '#/components/schemas/List'
         '400':
           description: Bad Request
+        '403':
+          description: Forbidden
+        '422':
+          description: Bad Authorization Header
       x-codegen-request-body-name: body
-  /list/{list_id}:
+      security:
+        - bearerAuth: []
+  /list/{username}/{list_id}:
     get:
       tags:
         - list
       summary: Get list by id
       operationId: getListById
       parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
         - name: list_id
           in: path
           required: true
@@ -90,6 +112,11 @@ paths:
       summary: Update list by id
       operationId: updateListById
       parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
         - name: list_id
           in: path
           required: true
@@ -125,6 +152,11 @@ paths:
       summary: Delete list by id
       operationId: deleteListById
       parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
         - name: list_id
           in: path
           required: true

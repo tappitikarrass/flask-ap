@@ -25,8 +25,8 @@ bp_swagger_ui = get_swaggerui_blueprint(
 )
 
 from .user import bp_user
-# from .list import bp_list
+from .list import bp_list
 
 app.register_blueprint(bp_swagger_ui)
 app.register_blueprint(bp_user)
-# app.register_blueprint(bp_list)
+app.register_blueprint(bp_list)

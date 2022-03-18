@@ -1,7 +1,7 @@
 from functools import wraps
 from flask import jsonify, request
 
-from .schemas import (UserSchema)
+from .schemas import (UserSchema, ListSchema)
 from . import (bcrypt, db)
 
 def session_lifecycle(func):
@@ -30,6 +30,8 @@ def get_entries(model_class, model_schema):
 @session_lifecycle
 def get_entry_by_id(model_class, model_schema, id):
     entry = db.session.query(model_class).filter_by(user_id=id).first()
+    if model_schema == ListSchema:
+        entry = db.session.query(model_class).filter_by(list_id=id).first()
     if entry is None:
         return None
     return jsonify(model_schema().dump(entry))
@@ -43,6 +45,8 @@ def get_entry_by_username(model_class, model_schema, username):
 @session_lifecycle
 def delete_entry_by_id(model_class, model_schema, id):
     entry = db.session.query(model_class).filter_by(user_id=id).first()
+    if model_schema == ListSchema:
+        entry = db.session.query(model_class).filter_by(list_id=id).first()
     if entry is None:
         return None
     db.session.delete(entry)
@@ -51,11 +55,13 @@ def delete_entry_by_id(model_class, model_schema, id):
 @session_lifecycle
 def update_entry_by_id(model_class, model_schema, id, **kwargs):
     entry = db.session.query(model_class).filter_by(user_id=id).first()
+    if model_schema == ListSchema:
+        entry = db.session.query(model_class).filter_by(list_id=id).first()
     if entry is None:
         return None
     for key, value in kwargs.items():
         setattr(entry, key, value)
-    if entry.user_id != id:
+    if entry.user_id != id and entry.list_id != id:
         raise InvalidUsage("Object not found", status_code=404)
     return jsonify(model_schema().dump(entry))
 # UTILS
