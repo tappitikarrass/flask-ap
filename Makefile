@@ -6,7 +6,7 @@ PORT=8000
 
 curl:
 	sh curl.sh
-alembic:
+alembic-reload:
 	alembic downgrade base
 	alembic upgrade head
 pytest:

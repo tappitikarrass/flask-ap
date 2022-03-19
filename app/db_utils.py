@@ -49,7 +49,7 @@ def entry_by_id(method, model_class, id, **kwargs):
         return None
     if method == "get":
         return jsonify(model_schema().dump(entry))
-    if method == "update":
+    if method == "put":
         for key, value in kwargs.items():
             setattr(entry, key, value)
         if entry.user_id != id and entry.list_id != id:
@@ -72,9 +72,9 @@ def get_user(username):
         return None
     return jsonify(UserSchema().dump(entry))
 def check_access(cur_indentity, username, admin):
-    if username != cur_indentity and admin is None:
-        return False
-    return True
+    if username == cur_indentity or admin is not None:
+        return True
+    return False
 def generate_password_hash(request_json):
     user_data = UserSchema().load(request_json)
     pwd = request.json.get("password", None)
