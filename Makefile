@@ -3,6 +3,7 @@ PGADMIN_EMAIL=lytvyn349@gmail.com
 PGADMIN_PASSWORD=aboba
 HOST=127.0.0.1
 PORT=8000
+COV_REPORT=term
 
 curl:
 	sh curl.sh
@@ -10,7 +11,7 @@ alembic-reload:
 	alembic downgrade base
 	alembic upgrade head
 pytest:
-	pytest --cov=app tests
+	pytest --cov-report $(COV_REPORT) --cov=app tests
 # venv
 venv:
 	python3 -m venv venv
