@@ -1,5 +1,7 @@
 from flask import (Blueprint, jsonify)
+from flask_jwt_extended import jwt_required
 from mal import Anime
+
 from models.schemas import AnimeSchema
 
 bp_anime = Blueprint(name="bp_anime", import_name=__name__)
@@ -15,6 +17,7 @@ class AnimeObj():
         self.image_url = image_url
 
 @bp_anime.route("/anime/<int:mal_id>", methods=["GET"])
+@jwt_required()
 def anime_by_id(mal_id):
     anime = Anime(mal_id)
     anime_obj = AnimeObj(mal_id=anime.mal_id,
