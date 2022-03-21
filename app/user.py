@@ -6,7 +6,7 @@ from flask_jwt_extended import (
     get_jwt_identity,
     get_jwt
 )
-from .db_utils import (
+from models.db_utils import (
     get_entries,
     entry_by_id,
     get_user,
@@ -15,8 +15,8 @@ from .db_utils import (
     get_json_field,
     check_access
 )
-from .models import (User, Admin, TokenBlocklist)
-from .schemas import (UserSchema, AdminSchema)
+from models.models import (User, Admin, TokenBlocklist)
+from models.schemas import (UserSchema, AdminSchema)
 from . import (bcrypt, jwt, db)
 
 bp_user = Blueprint(name="bp_user", import_name=__name__)
@@ -66,7 +66,7 @@ def get_users():
     admin = get_admin(get_json_field(user, "user_id"))
     if admin is None:
         return jsonify(403), 403
-    return get_entries(User, UserSchema), 200
+    return get_entries(User), 200
 
 @bp_user.route("/user", methods=["POST"])
 def post_user():

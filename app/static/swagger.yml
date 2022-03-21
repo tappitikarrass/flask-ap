@@ -298,6 +298,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
+        '401':
+          description: Forbidden
+        '403':
+          description: Forbidden
+        '422':
+          description: Bad Authorization Header
+      security:
+        - bearerAuth: []
     post:
       tags:
         - user

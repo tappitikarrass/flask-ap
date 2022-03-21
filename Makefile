@@ -11,7 +11,7 @@ alembic-reload:
 	alembic downgrade base
 	alembic upgrade head
 pytest:
-	pytest --cov-report $(COV_REPORT) --cov=app tests
+	clear ; pytest --cov-report $(COV_REPORT) --cov=app tests
 # venv
 venv:
 	python3 -m venv venv

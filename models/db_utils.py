@@ -1,9 +1,9 @@
 from functools import wraps
 from flask import jsonify, request
 
-from .schemas import (UserSchema, ListSchema, ListAnimeSchema, AdminSchema)
-from .models import (User, List, ListAnime, Admin)
-from . import (bcrypt, db)
+from models.schemas import (UserSchema, ListSchema, ListAnimeSchema, AdminSchema)
+from models.models import (User, List, ListAnime, Admin)
+from app import (bcrypt, db)
 
 def session_lifecycle(func):
     @wraps(func)

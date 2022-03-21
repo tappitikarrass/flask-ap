@@ -1,7 +1,7 @@
 from flask import (Blueprint, request, jsonify)
 from flask_jwt_extended import (jwt_required, get_jwt_identity)
 from mal import (Anime)
-from .db_utils import (
+from models.db_utils import (
     get_entries,
     entry_by_id,
 
@@ -10,8 +10,8 @@ from .db_utils import (
     get_admin,
     check_access,
 )
-from .models import (User, List, ListAnime, TokenBlocklist)
-from .schemas import (UserSchema, ListSchema, ListAnimeSchema)
+from models.models import (User, List, ListAnime, TokenBlocklist)
+from models.schemas import (UserSchema, ListSchema, ListAnimeSchema)
 from . import (jwt, db)
 
 bp_list = Blueprint(name="bp_list", import_name=__name__)

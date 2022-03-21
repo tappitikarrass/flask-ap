@@ -1,6 +1,6 @@
 from flask import (Blueprint, jsonify)
 from mal import Anime
-from .schemas import AnimeSchema
+from models.schemas import AnimeSchema
 
 bp_anime = Blueprint(name="bp_anime", import_name=__name__)
 
