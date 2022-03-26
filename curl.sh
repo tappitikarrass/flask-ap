@@ -172,8 +172,8 @@ get_anime() {
     curl -X GET "$URL/anime/$1"
 }
 
-TOKEN1="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0NzY1MDkyMSwianRpIjoiMDc3Y2ZmYmItMzc4Yy00NDEwLWIwYjAtNzc1YTgzM2NmN2JiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNiYW5kZXJhMSIsIm5iZiI6MTY0NzY1MDkyMSwiZXhwIjoxNjUwMjQyOTIxfQ.GWzUZ-qGs0mKAy51eqyHWyMBDpWi5lS9fQSOSksFQCc"
-TOKEN2="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0NzY1MDkyMSwianRpIjoiM2RhZjYwMDctMDU4NS00YTI2LThjOTUtMGUyODk3YmY4NTIwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Iml2YW5mcmFua28iLCJuYmYiOjE2NDc2NTA5MjEsImV4cCI6MTY1MDI0MjkyMX0.Cyvkpn0YhTwbpsTGngld_C7UwxFW7cO1ptyWygaOm5c"
+TOKEN1=""
+TOKEN2=""
 TOKEN3=""
 # post_user_1
 # post_user_2
@@ -182,4 +182,4 @@ TOKEN3=""
 # post_list_3 $TOKEN1
 # login_user sbandera1 supersecret
 # login_user ivanfranko ukraina
-remove_anime sbandera1 6 47 $TOKEN1
+# remove_anime sbandera1 6 47 $TOKEN1
