@@ -1,5 +1,6 @@
 import base64
 
+# USER
 post_user_data_200 = {
    "username": "sbandera1",
    "firstname": "Stepan",
@@ -40,3 +41,14 @@ login_creds_200 = base64.b64encode(b'sbandera1:supersecret').decode('utf-8')
 login_creds_alt_200 = base64.b64encode(b'ivanbahryanyi:fcksovietunion').decode('utf-8')
 login_creds_403 = base64.b64encode(b'sbandera1:supersecreta').decode('utf-8')
 login_creds_404 = base64.b64encode(b'sbandera2:supersecret').decode('utf-8')
+
+# LIST
+post_list_data_200 = {
+  "name": "watchlist"
+}
+update_list_data_200 = {
+  "name": "newname"
+}
+post_list_anime_data_200 = {
+    "mal_id": 47
+}

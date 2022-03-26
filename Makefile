@@ -35,7 +35,7 @@ docker-init: docker-pull
     	-e 'PGADMIN_DEFAULT_PASSWORD=$(PGADMIN_PASSWORD)' \
 		-p 8081:80 \
 		--name flask-pgadmin4 \
-    	-d dpage/pgadmin4
+		-d dpage/pgadmin4:latest
 docker-stop: 
 	sudo docker stop flask-pgadmin4
 	sudo docker stop flask-postgres
@@ -45,7 +45,11 @@ docker-start:
 # wsgi
 run-flask:
 	FLASK_ENV=development flask run --host $(HOST) --port $(PORT)
+run-flask-silent:
+	FLASK_ENV=development flask run --host $(HOST) --port $(PORT) > /dev/null
 run-gunicorn:
 	gunicorn -b $(HOST):$(PORT) app:app
+run-gunicorn-silent:
+	gunicorn -b $(HOST):$(PORT) app:app > /dev/null
 pg-psql:
 	psql -h localhost -p 5432 -U postgres

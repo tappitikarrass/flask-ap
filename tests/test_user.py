@@ -1,9 +1,8 @@
 from app import (db)
-from models.models import (User)
-from models.db_utils import (get_json_field)
 from .conftest import (
     get_last_user,
-    get_token
+    get_token,
+    get_json_field
 )
 from .test_data import (
     post_user_data_200,
@@ -54,7 +53,20 @@ class TestUser:
                                    'invalid_token'}
                                    )
             assert response.status_code == 422
-    # class TestUserGet:
+    class TestUserGetUsers:
+        def test_get_users_200(self, client, create_admin, delete_user):
+            response = client.get("/user",
+                                   headers={'Authorization': 'Bearer ' +
+                                   get_token(client)}
+                                  )
+            assert response.status_code == 200
+        def test_get_users_403(self, client, create_admin,
+                               delete_user_alt, delete_user):
+            response = client.get("/user",
+                                   headers={'Authorization': 'Bearer ' +
+                                   get_token(client, login_creds_alt_200)}
+                                  )
+            assert response.status_code == 403
     class TestUserPost:
         def test_post_user_200(self, client, delete_user):
             response = client.post("/user",

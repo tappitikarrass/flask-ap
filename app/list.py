@@ -20,7 +20,8 @@ bp_list = Blueprint(name="bp_list", import_name=__name__)
 @jwt_required()
 def get_lists_by_username(username):
     cur_indentity = get_jwt_identity()
-    user = get_user(cur_indentity)
+    user_cur = get_user(cur_indentity)
+    user = get_user(username)
     if user is None:
         return jsonify(404), 404
     user_id = get_json_field(user, "user_id")
@@ -39,11 +40,12 @@ def post_list():
     admin = get_admin(get_json_field(cur_user, "user_id"))
 
     request_data = request.get_json()
-    user_id = request_data["user_id"]
-    user = entry_by_id("get", User, user_id)
-    username = get_json_field(user, "username")
-    print(admin, username, cur_indentity)
-    print(check_access(cur_indentity, username, admin))
+    try:
+        user_id = request_data["user_id"]
+        user = entry_by_id("get", User, user_id)
+        username = get_json_field(user, "username")
+    except Exception:
+        return jsonify(400), 400
 
     if not check_access(cur_indentity, username, admin):
         return jsonify(403), 403
@@ -84,9 +86,9 @@ def list_by_id(username, list_id):
         return list, 200
     if request.method == "PUT":
         list_data = ListSchema().load(request.get_json())
-        return entry_by_id("put", ListAnime, 0, **list_data), 200
+        return entry_by_id("put", List, list_id, **list_data), 200
     if request.method == "DELETE":
-        return entry_by_id("delete", ListAnime, list_id), 200
+        return entry_by_id("delete", List, list_id), 200
 
 @bp_list.route("/list/<username>/<int:list_id>/<int:mal_id>", methods=["DELETE"])
 @jwt_required()
@@ -103,8 +105,8 @@ def list_delete_entry(username, list_id, mal_id):
 
     list = entry_by_id("get", List, list_id)
     list_user_id = get_json_field(list, "user_id")
-    if list_user_id != user_id:
-        return jsonify(404), 404
+    # if list_user_id != user_id:
+    #     return jsonify(404), 404
 
     list_animes = db.session.query(ListAnime).filter_by(list_id=list_id).all()
     for i in range(len(list_animes)):
