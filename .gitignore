@@ -3,3 +3,4 @@ __pycache__
 htmlcov
 coverage.xml
 .coverage
+.pytest_cache
