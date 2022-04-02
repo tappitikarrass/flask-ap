@@ -1,28 +1,43 @@
 ## Anime catalogue REST API built with Flask
 
-#### How to run it on GNU/Linux
+#### Deploy on GNU/Linux
 1. Install `docker` and `make`.
-1. Clone this repository.
-1. Run `make docker-rel-init` inside the cloned directory to build docker image and create container.
-1. Now you should be able to access the API on `localhost:8000`.
+1. Clone this repo.
+1. Run `make docker-up` inside the cloned repo to build docker image and create containers.
+1. Make sure all containers are ready.
+1. Run `make docker-init` in another terminal.
+1. Now you should be able to access API, Pgadmin4 and Postgres at `localhost` using ports from table at the bottom of readme.
 
-#### Sending requests using `curl`
-You can use functions in `curl.sh` to send test requests.
-Call some functions at the bottom of the `curl.sh` and run `make curl` to send requests.
+#### Run app with `flask run`
+1. Obvious, you should deploy app first.
+1. Run `make flask`.
 
-#### Pytest and coverage
-Run `make pytest` to run tests and check code coverage.
+Source tree is mounted into container. So, it will reload automatically if you change files inside repo directory.
 
-#### Configure development environment
-1. Install following dependencies: `make`, `docker`, `python-3.10.2`, `postgres`.
-<br>You may run into some problems using other python3 versions but in generally it should work just fine.
-1. Run `make docker-dev-init` to pull docker images and create containers with `postgres` and `pgadmin4` instances.
-1. Create virtualenv : `make venv`
-1. Activate venv: `source venv/bin/activate`
-1. Install dependencies: `make pip-install`
-1. You can upgrade depencencies with `pip-upgrade`, but again it may cause problems.
-1. Run app with `make run-flask` or `make run-gunicorn`.
-1. For more information check `Makefile`, it speaks for itself.
+#### Reload app container
+By default app container run app using production WSGI server `gunicorn`.
+
+1. Press `Ctrl-C` in terminal running `make docker-up`.
+1. Run `make docker-up` again.
+
+If you for some reason want to remove containers run `make docker-down`.
+
+#### Configure pgamdin4 and connect to postgres
+1. Run `make docker-info`. It will print login information for postgres and pgadmin4.
+1. Login to Pgadmin4.
+1. After login click on "Add News Server" icon in "Quick Links" section.
+1. Fill name fields in "General" tab. Then fill to fill "Connection" tab using info from `make docker-info`.
+
+#### Makefile
+For more information check Makefile, it speaks for itself.
+
+#### Table with ports
+| service   | port                             |
+|-----------|----------------------------------|
+| postgres  | localhost:5432                   |
+| pgadmin4  | [localhost:8081](localhost:8081) |
+| gunicorn  | [localhost:8000](localhost:8000) |
+| flask run | [localhost:5000](localhost:5000) |
 
 #### LICENSE
-[3-Clause BSD License](LICENSE)
+[BSD-3-Clause License](LICENSE)

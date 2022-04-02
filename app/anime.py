@@ -28,3 +28,7 @@ def anime_by_id(mal_id):
                          rating=anime.rating,
                          image_url=anime.image_url)
     return jsonify(AnimeSchema().dump(anime_obj)), 200
+
+# @bp_anime.route("/hello", methods=["GET"])
+# def hello():
+#     return jsonify("hello"), 200
