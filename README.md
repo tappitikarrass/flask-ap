@@ -10,7 +10,10 @@
 
 #### Run app with `flask run`
 1. Obvious, you should deploy app first.
+1. Create local venv with `make local-venv` and install dependencies with `make local-pip-install`.
+1. Activate venv with `source venv/bin/activate`
 1. Run `make flask`.
+1. Make changes.
 
 Source tree is mounted into container. So, it will reload automatically if you change files inside repo directory.
 
