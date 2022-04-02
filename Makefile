@@ -4,7 +4,14 @@ curl:
 	@sh curl.sh
 psql:
 	@psql -h localhost -p 5432 -U postgres -d appdb
-# pip
+# local pip
+local-venv:
+	@python3 -m venv venv
+local-pip-install:
+	@pip install -r requirements.txt
+local-pip-freeze:
+	@pip freeze > requirements.txt
+# docker pip
 pip-install:
 	@sudo docker-compose exec web pip install -r requirements.txt
 pip-freeze:
