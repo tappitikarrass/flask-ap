@@ -25,8 +25,11 @@ class AdminSchema(Schema):
 class AnimeSchema(Schema):
     mal_id = fields.Integer()
     title= fields.String()
+    media_type = fields.String()
+    num_episodes = fields.Integer()
     score = fields.Float()
     genres = fields.List(fields.String)
     duration = fields.String()
+    synopsis = fields.String()
     rating = fields.String()
     image_url = fields.String()

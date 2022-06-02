@@ -4,8 +4,10 @@ from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_swagger_ui import get_swaggerui_blueprint
 from datetime import (timedelta)
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.config["JWT_SECRET_KEY"] = "super-secret"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:bePG2jqRxmRZiz@postgres/appdb"

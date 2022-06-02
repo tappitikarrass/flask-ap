@@ -1,6 +1,6 @@
 from flask import (Blueprint, request, jsonify)
 from flask_jwt_extended import (jwt_required, get_jwt_identity)
-from mal import (Anime)
+
 from models.db_utils import (
     get_entries,
     entry_by_id,
