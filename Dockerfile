@@ -33,6 +33,7 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache /wheels/*
 
 EXPOSE 8000
+EXPOSE 5000
 
 USER app
 

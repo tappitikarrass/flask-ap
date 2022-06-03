@@ -1,0 +1,187 @@
+@use "base16" as *;
+@use "fonts";
+
+* {
+    font-family: "IBMPlex Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: width 0.2s, height 0.2s, margin 0.2s;
+    transition-timing-function: ease-out;
+}
+
+::selection {
+    background-color: $base03;
+}
+
+body {
+    background-color: $base00;
+    color: $base07;
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    padding: 5vh 5vw;
+    min-height: 86vh !important;
+    border-radius: 2px;
+    box-sizing: border-box;
+    border-left: 1px solid $base02;
+    border-right: 1px solid $base02;
+    margin-top: 7vh;
+}
+
+table, td, th {
+    border: 1px solid $base02;
+    border-collapse: collapse;
+}
+
+td, th {
+    padding: 1em;
+}
+
+h2 {
+    text-align: center;
+    user-select: none;
+    margin-bottom: 1em;
+}
+
+nav {
+    @extend .iframe-nav-footer;
+    position: fixed;
+    top: 0;
+}
+
+footer {
+    @extend .iframe-nav-footer;
+    position: relative;
+}
+
+.iframe-nav-footer {
+    height: 7vh;
+    & > iframe {
+        position: absolute;
+        width: 100vw;
+        height: 7vh;
+        border: none;
+    }
+}
+
+// table-bt
+.table-bt {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: inherit;
+    color: inherit;
+    font-size: 12pt;
+    text-align: left;
+}
+
+.table-bt-remove, .table-bt-open {
+    @extend .table-bt;
+    padding: 1em;
+}
+
+// field
+.field {
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+    padding: 1em;
+    margin-top: 1em;
+    margin-right: 1em;
+    outline: none;
+}
+
+.field-end {
+    @extend .field;
+    margin-right: 0em;
+}
+
+.fields-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+// bt
+.bt {
+    @extend .field;
+    @extend .bt-hover-active;
+}
+
+.bt-hover-active {
+    &:hover {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
+    }
+    &:active {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.3) 0 0);
+    }
+}
+
+@mixin bt-color($bg-color) {
+    background-color: $bg-color;
+}
+
+.bt-blue, .bt-green, .bt-red {
+    @extend .bt;
+}
+
+.bt-blue {
+    @include bt-color($base0D)
+}
+
+.bt-green {
+    @include bt-color($base0B)
+}
+
+.bt-red {
+    @include bt-color($base08)
+}
+
+.bt-end {
+    margin-right: 0;
+}
+
+.bt-red-end {
+    @extend .bt-red;
+    @extend .bt-end;
+}
+
+.bt-green-end {
+    @extend .bt-green;
+    @extend .bt-end;
+}
+
+.bt-blue-end {
+    @extend .bt-blue;
+    @extend .bt-end;
+}
+
+// mediaqueries
+// desktop
+@media screen and (min-width: 810px) {
+    .content {
+        width: 50vw;
+        margin-left: 25vw;
+    }
+}
+
+// tablet
+@media screen and (min-width: 500px) and (max-width: 810px) {
+    .content {
+        width: 70vw;
+        margin-left: 15vw;
+    }
+}
+
+// phone
+@media screen and (max-width: 500px) {
+    .content {
+        border: none;
+    }
+    .fields-row {
+        flex-direction: column;
+    }
+}

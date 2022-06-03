@@ -1,0 +1,70 @@
+@use "base16" as *;
+@use "main";
+
+.notification-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    right: 0;
+    
+    width: 30vw;
+
+    margin: 0.5em;
+    margin-top: 10vh;
+
+    box-shadow: 0px 0px 20px black;
+    border-radius: 5px;
+}
+
+.notification-error {
+    @extend .notification-container;
+    background-color: $base08;
+}
+
+.notification-warning {
+    @extend .notification-container;
+    background-color: $base09;
+}
+
+.notification-common {
+    @extend .notification-container;
+    background-color: $base0D;
+}
+
+.notification-title {
+    margin-bottom: 0.5em;
+}
+
+.notification-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1.5em;
+    margin-top: 1.1em;
+}
+
+// mediaqueries
+// desktop
+@media screen and (min-width: 810px) {
+}
+
+// tablet
+@media screen and (min-width: 500px) and (max-width: 810px) {
+    .notification-container {
+        width: 50vw;
+    }
+}
+
+// phone
+@media screen and (max-width: 500px) {
+    .notification-container {
+        width: 90vw;
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+}

@@ -1,0 +1,74 @@
+@use "base16" as *;
+@use "main";
+
+.content {
+    display: flex;
+    flex-direction: row;
+}
+
+td {
+    &.val {
+        width: 100%;
+    }
+    &.key {
+        text-align: right;
+    }
+}
+
+#info {
+    display: flex;
+    flex-direction: column;
+    & > div {
+        margin-bottom: 2em;
+    }
+}
+
+#image {
+    width: 30vw;
+    margin-right: 2em;
+    margin-top: 3.7em;
+    & > img {
+        border-radius: 2px;
+    }
+}
+
+// phone and tablet
+@media screen and (max-width: 810px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #image {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        width: 80vw;
+
+        margin: 0;
+        margin-top: 0.5em;
+        margin-bottom: 1.5em;
+        & > img {
+            width: 60vw;
+        }
+    }
+}
+
+// desktop and tablet
+@media screen and (min-width: 500px) {
+    .content {
+        width: 70vw;
+        margin-left: 15vw;
+        & >h2 {
+            text-align: left;
+        }
+    }
+
+    #image {
+        & > img {
+            width: 25vw;
+        }
+    }
+}

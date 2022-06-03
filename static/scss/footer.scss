@@ -1,0 +1,16 @@
+@use "base16" as *;
+@use "main";
+
+body {
+    background-color: $base01;
+    color: $base04;
+    font-size: 0.8em;
+}
+
+.copyright {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    user-select: none;
+}

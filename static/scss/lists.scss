@@ -1,0 +1,14 @@
+@use "base16" as *;
+@use "main";
+
+td {
+    width: 100%;
+    padding: 0;
+    
+    &:hover {
+        background-color: $base02;
+    }
+    &:active {
+        background-color: $base03;
+    }
+}

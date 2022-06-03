@@ -24,6 +24,7 @@ services:
     build: ./nginx
     volumes:
       - ./static:/home/app/web/static
+      - ./frontend:/home/app/web/frontend
     ports:
       - "80:80"
     depends_on:

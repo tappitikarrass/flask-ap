@@ -1,0 +1,35 @@
+@use "base16" as *;
+@use "main";
+
+body {
+    background-color: $base01;
+}
+
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+
+    & > a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        height: 100%;
+        width: 100%;
+
+        &:hover,
+        &:link,
+        &:active,
+        &:visited {
+            color: $base07;
+            text-decoration: none;
+        }
+        &:hover {
+            background-color: $base03;
+        }
+    }
+}
