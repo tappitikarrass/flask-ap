@@ -1,20 +1,3 @@
-function getPage(page) {
-    var xHttpReq = new XMLHttpRequest();
-
-    xHttpReq.onreadystatechange = function() {
-        if(this.readyState == 4 && this.status == 200) {
-            document.getElementById("viewer").innerHTML = this.responseText;
-        }
-    }
-
-    if (page == "anime.html") {
-        fetch_anime(666)
-    }
-
-    xHttpReq.open("GET", page, true);
-    xHttpReq.send();
-}
-
 async function fetch_anime(mal_id) {
     const response = await fetch("http://localhost/backend/anime/" + mal_id.toString(), { method: 'GET' });
     const anime_data = await response.json();
@@ -34,3 +17,5 @@ async function fetch_anime(mal_id) {
         document.getElementById("duration_key").innerHTML = "Average duration per ep.:";
     }
 }
+
+fetch_anime(47)
