@@ -9,11 +9,16 @@ function getPage(page) {
     
     // append script depending on current page
     document.body.removeChild(document.body.lastChild);
+    document.head.removeChild(document.head.lastChild);
 
     file_name = page.replace(/\.[^/.]+$/, "");
-    var script = document.createElement('script');
+    var script = document.createElement("script");
+    var link = document.createElement("link");
     script.src = "js/" + file_name + ".js";
+    link.rel = "stylesheet";
+    link.href = "css/" + file_name + ".css";
     document.body.appendChild(script);
+    document.head.appendChild(link);
 
     xHttpReq.open("GET", page, true);
     xHttpReq.send();

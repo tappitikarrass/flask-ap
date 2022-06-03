@@ -1,16 +1,22 @@
 function formSubmit(event) {
-    var url = "http://localhost/backend/user";
+    var url = "http://localhost/backend/login";
     var request = new XMLHttpRequest();
     request.open('POST', url, true);
     request.setRequestHeader("Content-Type", "application/json");
 
     request.onload = function() {
         console.log(request.responseText);
-        if(request.status == 400) {
-            notify("error", "Already exists", "User with such username or email is already registered.");
+
+        var tokenJson = JSON.parse(request.responseText);
+        var cookie = new Cookie("token", tokenJson.token);
+        cookie.setHttpOnly = true;
+        cookie.setPath("/");
+
+        if(request.status == 404) {
+            notify("error", "User not found", "Wrong username.");
         }
-        if(request.status == 200) {
-            notify("common", "Success", "Registration completed successfully");
+        if(request.status == 403) {
+            notify("error", "Unable to login", "Wrong password.");
         }
     };
 
@@ -19,9 +25,10 @@ function formSubmit(event) {
 
     var formData = new FormData(event.target);
 
-    formDataJson = JSON.stringify(Object.fromEntries(formData));
-    request.send(formDataJson);
+    encodedCreds = btoa(formData.get("username") + ":" + formData.get("password"));
 
+    request.setRequestHeader("Authorization", "Basic " + encodedCreds);
+    request.send();
 
     event.preventDefault();
 }
