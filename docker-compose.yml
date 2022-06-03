@@ -1,25 +1,30 @@
 version: '3'
 services:
-    web:
-      build: .
-      ports:
-          - "8000:8000"
-          - "5000:5000"
-      volumes:
-          - .:/app
-      depends_on:
-          - postgres
-    postgres:
-      image: postgres:14.2-alpine
-      ports:
-        - "5432:5432"
-      environment:
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=bePG2jqRxmRZiz
-    pgadmin4:
-      image: dpage/pgadmin4:latest
-      ports:
-        - "8081:80"
-      environment:
-        - PGADMIN_DEFAULT_EMAIL=example@liamg.com
-        - PGADMIN_DEFAULT_PASSWORD=supersecret
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/home/app/web
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:14.2-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=bePG2jqRxmRZiz
+  pgadmin4:
+    image: dpage/pgadmin4:latest
+    ports:
+      - "8081:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=example@liamg.com
+      - PGADMIN_DEFAULT_PASSWORD=supersecret
+  nginx:
+    build: ./nginx
+    volumes:
+      - ./static:/home/app/web/static
+    ports:
+      - "80:80"
+    depends_on:
+      - web

@@ -33,8 +33,7 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache /wheels/*
 
 EXPOSE 8000
-EXPOSE 5000
 
 USER app
 
-CMD ["gunicorn", "-b", "0.0.0.0:8000", "app:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]

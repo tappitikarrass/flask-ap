@@ -17,11 +17,11 @@ pip-install:
 pip-freeze:
 	@sudo docker-compose exec web pip freeze > requirements.txt
 pip-upgrade:
-	@sudo docker-compose exec web /opt/venv/bin/python3 -m pip install --upgrade pip
+	@sudo docker-compose exec web python3 -m pip install --upgrade pip
 	@sudo docker-compose exec web pip-upgrade
 # docker
 flask:
-	@sudo docker-compose exec web flask run --host 0.0.0.0 --port 5000
+	@sudo docker-compose exec web flask run --host 0.0.0.0 --port 8000
 pytest:
 	@clear ; sudo docker-compose exec web pytest --cov-report $(COV_REPORT) --cov=app tests
 docker-sh:

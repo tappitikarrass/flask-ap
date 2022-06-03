@@ -28,14 +28,6 @@ def anime_by_id(mal_id):
     cli.anime_fields = Field.all_anime();
 
     anime = cli.get_anime(mal_id)
-    # anime = Anime(mal_id)
-    # anime_obj = AnimeObj(mal_id=anime.mal_id,
-    #                      title=anime.title,
-    #                      score=anime.score,
-    #                      genres=anime.genres,
-    #                      duration=anime.duration,
-    #                      rating=anime.rating,
-    #                      image_url=anime.image_url)
     
     anime_obj = AnimeObj(mal_id=mal_id,
                          title=anime.title,
