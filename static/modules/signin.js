@@ -1,5 +1,4 @@
 import notify from './notify.js';
-// import getPage from './main.js';
 import { profile } from '../index.js';
 import { fetchUser } from './profile.js';
 import { setCookie } from './cookies.js';
@@ -14,11 +13,7 @@ export async function submitSignInForm(event) {
     const formData = new FormData(event.target);
 
     request.onload = function f() {
-        // console.log(request.responseText);
-
         const tokenJson = JSON.parse(request.responseText);
-        setCookie('token', tokenJson.token, 1);
-        setCookie('username', formData.get('username'), 1);
 
         if (request.status === 404) {
             notify('error', 'User not found', 'Wrong username.');
@@ -27,8 +22,8 @@ export async function submitSignInForm(event) {
             notify('error', 'Unable to login', 'Wrong password.');
         }
         if (request.status === 200) {
-            // getPage('profile.html');
-            // fetchUser();
+            setCookie('token', tokenJson.token, 1);
+            setCookie('username', formData.get('username'), 1);
             profile();
         }
     };

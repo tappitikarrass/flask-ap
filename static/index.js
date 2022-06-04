@@ -27,6 +27,11 @@ export function anime() {
 document.getElementById('anime').addEventListener('click', anime);
 
 export function signin() {
+    const token = getCookie('token');
+    if (token != null) {
+        profile();
+        return;
+    }
     getPage('signin.html');
     function submit() {
         document.getElementById('signin-form').addEventListener('submit', submitSignInForm);
@@ -34,15 +39,6 @@ export function signin() {
     setTimeout(submit, 500);
 }
 document.getElementById('signin').addEventListener('click', signin);
-
-export function signup() {
-    getPage('signup.html');
-    function submit() {
-        document.getElementById('signup_form').addEventListener('submit', submitSignUpForm);
-    }
-    setTimeout(submit, 500);
-}
-document.getElementById('signup').addEventListener('click', signup);
 
 export function profile() {
     if (getCookie('token') == null) {
@@ -57,3 +53,17 @@ export function profile() {
     setTimeout(logOutFunc, 500);
 }
 document.getElementById('profile').addEventListener('click', profile);
+
+export function signup() {
+    const token = getCookie('token');
+    if (token != null) {
+        profile();
+        return;
+    }
+    getPage('signup.html');
+    function submit() {
+        document.getElementById('signup_form').addEventListener('submit', submitSignUpForm);
+    }
+    setTimeout(submit, 500);
+}
+document.getElementById('signup').addEventListener('click', signup);

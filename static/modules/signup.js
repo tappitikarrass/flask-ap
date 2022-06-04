@@ -1,4 +1,5 @@
 import notify from './notify.js';
+import { signin } from '../index.js';
 
 export default function submitSingUpForm(event) {
     const url = 'http://localhost/backend/user';
@@ -7,12 +8,11 @@ export default function submitSingUpForm(event) {
     request.setRequestHeader('Content-Type', 'application/json');
 
     request.onload = function f() {
-        // console.log(request.responseText);
         if (request.status === 400) {
             notify('error', 'Already exists', 'User with such username or email is already registered.');
         }
         if (request.status === 200) {
-            notify('common', 'Success', 'Registration completed successfully');
+            signin();
         }
     };
 
