@@ -3,45 +3,51 @@
     <head>
         <title>anime</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <link rel="stylesheet" href="css/anime.css"></link>
+        <!-- <link rel="stylesheet" href="css/anime.css"></link> -->
     </head>
     <body>
         <div class="content">
-            <div id="image">
-                <img id="banner_image" src="" alt="Banner"/>
+            <div id="anime-search"class="fields-row">
+                <input type="text" name="anime_search" placeholder="Search" class="field" id="search-bar">
+                <input type="submit" value="Search" class="bt-blue-end" id="search-bt">
             </div>
-            <div id="info">
-                <div id="summary">
-                    <h2 id="title"></h2>
-                    <table>
-                        <tr>
-                            <td class="key">Score:</td>
-                            <td class="val" id="score_val"></td>
-                        </tr>
-                        <tr>
-                            <td class="key">Genres:</td>
-                            <td class="val" id="genres_val"></td>
-                        </tr>
-                        <tr>
-                            <td class="key" id="duration_key">Duration:</td>
-                            <td class="val" id="duration_val"></td>
-                        </tr>
-                        <tr>
-                            <td class="key">Media type:</td>
-                            <td class="val" id="media_type_val"></td>
-                        </tr>
-                        <tr>
-                            <td class="key">Number of episodes:</td>
-                            <td class="val" id="episodes_val"></td>
-                        </tr>
-                        <tr>
-                            <td class="key">Rating:</td>
-                            <td class="val" id="rating_val"></td>
-                        </tr>
-                    </table>
+            <div class="content-anime">
+                <div id="image">
+                    <img id="banner_image" src="" alt="Banner"/>
                 </div>
-                <div id="text">
-                    <p id="synopsis_val"></p>
+                <div id="info">
+                    <div id="summary">
+                        <h2 id="title"></h2>
+                        <table>
+                            <tr>
+                                <td class="key">Score:</td>
+                                <td class="val" id="score_val"></td>
+                            </tr>
+                            <tr>
+                                <td class="key">Genres:</td>
+                                <td class="val" id="genres_val"></td>
+                            </tr>
+                            <tr>
+                                <td class="key" id="duration_key">Duration:</td>
+                                <td class="val" id="duration_val"></td>
+                            </tr>
+                            <tr>
+                                <td class="key">Media type:</td>
+                                <td class="val" id="media_type_val"></td>
+                            </tr>
+                            <tr>
+                                <td class="key">Number of episodes:</td>
+                                <td class="val" id="episodes_val"></td>
+                            </tr>
+                            <tr>
+                                <td class="key">Rating:</td>
+                                <td class="val" id="rating_val"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="text">
+                        <p id="synopsis_val"></p>
+                    </div>
                 </div>
             </div>
         </div>

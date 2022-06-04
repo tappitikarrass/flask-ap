@@ -14,7 +14,7 @@
 }
 
 body {
-    background-color: $base00;
+    background-color: black;
     color: $base07;
     margin: 0;
     padding: 0;
@@ -67,6 +67,7 @@ body {
 }
 
 .content {
+    background-color: $base00;
     padding: 0vh 5vw;
     // padding: 5vh 5vw;
     min-height: 86vh !important;

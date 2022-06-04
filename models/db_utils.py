@@ -60,6 +60,24 @@ def entry_by_id(method, model_class, id, **kwargs):
         return jsonify(model_schema().dump(entry))
 
 @session_lifecycle
+def entry_by_username(method, username, **kwargs):
+    entry = db.session.query(User).filter_by(username=username).first()
+    if entry is None:
+        return None
+    if method == "get":
+        return jsonify(UserSchema().dump(entry))
+    if method == "put":
+        for key, value in kwargs.items():
+            setattr(entry, key, value)
+        if entry.username != username and entry.list_id != id:
+            raise InvalidUsage("Object not found", status_code=404)
+        return jsonify(UserSchema().dump(entry))
+    if method == "delete":
+        db.session.delete(entry)
+        return jsonify(UserSchema().dump(entry))
+
+
+@session_lifecycle
 def get_admin(user_id):
     entry = db.session.query(Admin).filter_by(user_id=user_id).first()
     if entry is None:

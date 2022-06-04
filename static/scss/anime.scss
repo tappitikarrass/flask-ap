@@ -1,9 +1,22 @@
 @use "base16" as *;
 @use "main";
 
-.content {
+.content-anime {
+    display: none;
+    flex-direction: row;
+}
+
+#anime-search {
     display: flex;
     flex-direction: row;
+    & > input {
+        margin: 0;
+        margin-top: 2em;
+        margin-right: 1em;
+    }
+    & > .bt-blue-end {
+        width: 10vw;
+    }
 }
 
 td {
@@ -18,6 +31,7 @@ td {
 #info {
     display: flex;
     flex-direction: column;
+    margin-top: 2.7em;
     & > div {
         margin-bottom: 2em;
     }
@@ -26,7 +40,7 @@ td {
 #image {
     width: 30vw;
     margin-right: 2em;
-    margin-top: 3.7em;
+    margin-top: 2.7em;
     & > img {
         border-radius: 2px;
     }
@@ -34,9 +48,23 @@ td {
 
 // phone and tablet
 @media screen and (max-width: 810px) {
-    .content {
+    .content-anime {
         flex-direction: column;
         align-items: center;
+    }
+
+    #info {
+        margin-top: 0.5em;
+    }
+
+    #anime-search {
+        flex-direction: column;
+        & > input {
+            margin-top: 1em;
+        }
+        & > .bt-blue-end {
+            width: 100%;
+        }
     }
 
     #image {
@@ -48,8 +76,8 @@ td {
         width: 80vw;
 
         margin: 0;
-        margin-top: 0.5em;
-        margin-bottom: 1.5em;
+        margin-top: 3em;
+        margin-bottom: 1em;
         & > img {
             width: 60vw;
         }
@@ -61,7 +89,7 @@ td {
     .content {
         width: 70vw;
         margin-left: 15vw;
-        & >h2 {
+        & > .content-anime > h2 {
             text-align: left;
         }
     }
