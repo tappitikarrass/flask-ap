@@ -9,6 +9,7 @@ from flask_jwt_extended import (
 from models.db_utils import (
     get_entries,
     entry_by_id,
+    entry_by_username,
     get_user,
     get_admin,
     generate_password_hash,
@@ -72,7 +73,14 @@ def get_users():
 def post_user():
     try:
         user_data = generate_password_hash(request.get_json())
-        return entry_by_id("post", User, 0, **user_data), 200
+        # return entry_by_id("post", User, 0, **user_data), 200
+        
+        response = entry_by_id("post", User, 0, **user_data), 200
+        username = get_json_field(request, "username")
+        user_id = get_user(username).json.get("user_id", None)
+        user_data.update({"user_id": user_id})
+
+        return user_data
     except Exception as e:
         return jsonify(400), 400
 
@@ -96,3 +104,25 @@ def user_by_id(user_id):
     if request.method == "DELETE":
         logout()
         return entry_by_id("delete", User, user_id), 200
+
+@bp_user.route("/user/<username>", methods=["GET", "PUT", "DELETE"])
+@jwt_required()
+def user_by_username(username):
+    user = entry_by_username("get", username)
+    if user == None:
+        return jsonify(404), 404
+
+    user_id = get_json_field(user, "user_id")
+    admin = get_admin(user_id)
+    if not check_access(get_jwt_identity(), username, admin):
+        return jsonify(403), 403
+
+    if request.method == "GET":
+        return user, 200
+    if request.method == "PUT":
+        user_data = generate_password_hash(request.get_json())
+        return entry_by_username("put", username, **user_data), 200
+    if request.method == "DELETE":
+        logout()
+        return entry_by_username("delete", username), 200
+

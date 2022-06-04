@@ -7,6 +7,7 @@ from datetime import timedelta
 from models.schemas import AnimeSchema
 
 bp_anime = Blueprint(name="bp_anime", import_name=__name__)
+cli = client.Client("dd3d06bb7ea0c6b43eb65b7e1dd7a286")
 
 class AnimeObj():
     def __init__(self, mal_id, title, media_type, num_episodes, score, genres, duration, synopsis, rating, image_url):
@@ -22,24 +23,36 @@ class AnimeObj():
         self.image_url = image_url
 
 @bp_anime.route("/anime/<int:mal_id>", methods=["GET"])
-# @jwt_required()
+@jwt_required()
 def anime_by_id(mal_id):
-    cli = client.Client("dd3d06bb7ea0c6b43eb65b7e1dd7a286");
-    cli.anime_fields = Field.all_anime();
+    try:
+        cli.anime_fields = Field.all_anime();
 
-    anime = cli.get_anime(mal_id)
-    
-    anime_obj = AnimeObj(mal_id=mal_id,
-                         title=anime.title,
-                         media_type=str.upper(str(anime.media_type)),
-                         num_episodes=anime.num_episodes,
-                         score=anime.mean,
-                         genres=anime.genres,
-                         duration=timedelta(seconds=anime.average_episode_duration),
-                         synopsis=anime.synopsis,
-                         rating=str.upper(anime.rating),
-                         image_url=anime.main_picture_url)
-    return jsonify(AnimeSchema().dump(anime_obj)), 200
+        anime = cli.get_anime(mal_id)
+        
+        anime_obj = AnimeObj(mal_id=mal_id,
+                             title=anime.title,
+                             media_type=str.upper(str(anime.media_type)),
+                             num_episodes=anime.num_episodes,
+                             score=anime.mean,
+                             genres=anime.genres,
+                             duration=timedelta(seconds=anime.average_episode_duration),
+                             synopsis=anime.synopsis,
+                             rating=str.upper(anime.rating),
+                             image_url=anime.main_picture_url)
+        return jsonify(AnimeSchema().dump(anime_obj)), 200
+    except Exception:
+        return jsonify("400"), 400
+
+@bp_anime.route("/anime/search/<query>", methods=["GET"])
+@jwt_required()
+def anime_search(query):
+    try:
+        results = cli.anime_search(query=query, limit=1, fields=["id"])
+        for result in results:
+            return anime_by_id(result.id)
+    except Exception:
+        return jsonify("400"), 400
 
 @bp_anime.route("/hello", methods=["GET"])
 def hello():
