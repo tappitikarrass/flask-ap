@@ -1,5 +1,4 @@
 import { getCookie, eraseCookie } from './cookies.js';
-import getPage from './main.js';
 import { signin } from '../index.js';
 
 export async function fetchUser() {
@@ -38,6 +37,5 @@ export async function logOut() {
     );
     eraseCookie('username');
     eraseCookie('token');
-    // getPage('signin.html');
     signin();
 }

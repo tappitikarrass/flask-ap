@@ -30,6 +30,7 @@ export default async function fetchAnime() {
     } else {
         document.getElementsByClassName('content-anime')[0].style.display = 'none';
         notify('error', 'No results', 'No result found');
+        return;
     }
 
     const genres = animeData.genres.toString().replaceAll(',', ', ');
