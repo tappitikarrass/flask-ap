@@ -23,7 +23,7 @@ services:
   nginx:
     build: ./nginx
     volumes:
-      - ./static:/home/app/web/static
+      - ./purejsfrontend:/home/app/web/purejsfrontend
       - ./frontend:/home/app/web/frontend
     ports:
       - "80:80"
