@@ -1,0 +1,33 @@
+@use "base16" as *;
+
+#profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+th {
+    text-align: right;
+    user-select: none;
+}
+
+// phone
+@media screen and (max-width: 500px) {
+    th {
+        width: 25vw;
+    }
+}
+
+// tablet
+@media screen and (min-width: 500px) and (max-width: 810px) {
+    th {
+        width: 15vw;
+    }
+}
+
+// desktop
+@media screen and (min-width: 810px) {
+    th {
+        width: 10vw;
+    }
+}

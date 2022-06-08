@@ -1,0 +1,61 @@
+@use "base16" as *;
+
+.bt {
+  width: 100%;
+  border: none;
+  border-radius: 3px;
+  box-sizing: border-box;
+  padding: 1em;
+  margin-top: 1em;
+  margin-right: 1em;
+  outline: none;
+
+  &:hover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
+  }
+
+  &:active {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3) 0 0);
+  }
+}
+
+@mixin bt-color($bg-color) {
+  background-color: $bg-color;
+}
+
+.bt-blue,
+.bt-green,
+.bt-red {
+  @extend .bt;
+}
+
+.bt-blue {
+  @include bt-color($base0D);
+}
+
+.bt-green {
+  @include bt-color($base0B);
+}
+
+.bt-red {
+  @include bt-color($base08);
+}
+
+.bt-end {
+  margin-right: 0;
+}
+
+.bt-red-end {
+  @extend .bt-red;
+  @extend .bt-end;
+}
+
+.bt-green-end {
+  @extend .bt-green;
+  @extend .bt-end;
+}
+
+.bt-blue-end {
+  @extend .bt-blue;
+  @extend .bt-end;
+}

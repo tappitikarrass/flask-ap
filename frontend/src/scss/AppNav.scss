@@ -1,0 +1,54 @@
+@use "base16" as *;
+
+#app-nav {
+    background-color: $base01;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    & > a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        height: 100%;
+        width: 100%;
+
+        &:hover,
+        &:link,
+        &:active,
+        &:visited {
+            color: $base07;
+            text-decoration: none;
+        }
+        &:hover {
+            background-color: $base03;
+        }
+    }
+}
+
+// desktop
+@media screen and (min-width: 810px) {
+    #app-nav {
+        // width: 50vw;
+        // margin-left: 25vw;
+    }
+}
+
+// tablet
+@media screen and (min-width: 500px) and (max-width: 810px) {
+    #app-nav {
+        // width: 70vw;
+        // margin-left: 15vw;
+    }
+}
+
+// phone
+@media screen and (max-width: 500px) {
+    #app-nav {
+        // width: 100vw;
+        // margin-left: 0;
+    }
+}

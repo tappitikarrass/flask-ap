@@ -1,0 +1,107 @@
+@use "base16" as *;
+@use "main";
+
+.content-anime {
+  // display: none;
+  display: flex;
+  flex-direction: row;
+}
+
+#search-bt {
+    margin-top: 2em;
+}
+
+#anime-search {
+  display: flex;
+  flex-direction: row;
+  & > input {
+    margin: 0;
+    margin-top: 2em;
+    margin-right: 1em;
+  }
+  & > .bt-blue-end {
+    width: 10vw;
+  }
+}
+
+td {
+  &.val {
+    width: 100%;
+  }
+  &.key {
+    text-align: right;
+  }
+}
+
+#info {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2.7em;
+  & > div {
+    margin-bottom: 2em;
+  }
+}
+
+#image {
+  width: 30vw;
+  margin-right: 2em;
+  margin-top: 2.7em;
+  & > img {
+    border-radius: 2px;
+  }
+}
+
+// phone and tablet
+@media screen and (max-width: 810px) {
+  .content-anime {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #info {
+    margin-top: 0.5em;
+  }
+
+  #anime-search {
+    flex-direction: column;
+    & > input {
+      margin-top: 1em;
+    }
+    & > .bt-blue-end {
+      width: 100%;
+    }
+  }
+
+  #image {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 80vw;
+
+    margin: 0;
+    margin-top: 3em;
+    margin-bottom: 1em;
+    & > img {
+      width: 60vw;
+    }
+  }
+}
+
+// desktop and tablet
+@media screen and (min-width: 500px) {
+  .content {
+    width: 70vw;
+    margin-left: 15vw;
+    & > .content-anime > h2 {
+      text-align: left;
+    }
+  }
+
+  #image {
+    & > img {
+      width: 25vw;
+    }
+  }
+}
