@@ -1,8 +1,10 @@
-from flask import (Blueprint, jsonify)
+from flask import (Blueprint, jsonify, request)
 from flask_jwt_extended import jwt_required
 from mal import client
 from mal.enums import Field
 from datetime import timedelta
+
+from models.db_utils import get_json_field
 
 from models.schemas import AnimeSchema
 
@@ -23,7 +25,7 @@ class AnimeObj():
         self.image_url = image_url
 
 @bp_anime.route("/anime/<int:mal_id>", methods=["GET"])
-@jwt_required()
+# @jwt_required()
 def anime_by_id(mal_id):
     try:
         cli.anime_fields = Field.all_anime();
@@ -44,9 +46,10 @@ def anime_by_id(mal_id):
     except Exception:
         return jsonify("400"), 400
 
-@bp_anime.route("/anime/search/<query>", methods=["GET"])
-@jwt_required()
-def anime_search(query):
+@bp_anime.route("/anime/search/", methods=["POST"])
+# @jwt_required()
+def anime_search():
+    query = get_json_field(request.get_json(), "query")
     try:
         results = cli.anime_search(query=query, limit=1, fields=["id"])
         for result in results:
