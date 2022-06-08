@@ -1,11 +1,13 @@
 import React from 'react';
 
-import '../scss/main.scss';
+import '../scss/Homepage.scss';
 
 class Homepage extends React.PureComponent {
   render() {
     return (
-      <p>homepage</p>
+      <div id="homepage" className="content">
+        <p>homepage</p>
+      </div>
     );
   }
 }

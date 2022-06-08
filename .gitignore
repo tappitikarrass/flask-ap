@@ -4,5 +4,7 @@ htmlcov
 coverage.xml
 .coverage
 .pytest_cache
-static/node_modules
-static/css/*
+purejsfrontend/css/*
+purejsfrontend/node_modules
+frontend/node_modules
+frontend/build

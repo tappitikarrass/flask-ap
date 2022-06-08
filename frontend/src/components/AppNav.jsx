@@ -1,30 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import '../scss/AppNav.scss';
 
-class AppNav extends React.PureComponent {
-  render() {
-    return (
-      <nav id="app-nav">
-        <Link id="homepage" to="/">
-          Homepage
-        </Link>
-        <Link id="profile" to="/profile">
-          Profile
-        </Link>
-        <Link id="login" to="/login">
-          Login
-        </Link>
-        <Link id="signup" to="/signup">
-          Sign Up
-        </Link>
-        <Link id="anime" to="/anime">
-          Anime
-        </Link>
-      </nav>
-    );
-  }
+function AppNav() {
+  return (
+    <nav id="app-nav">
+      <NavLink id="homepage" to="/">
+        Homepage
+      </NavLink>
+      <NavLink id="profile" to="/profile">
+        Profile
+      </NavLink>
+      <NavLink id="login" to="/login">
+        Login
+      </NavLink>
+      <NavLink id="signup" to="/signup">
+        Sign Up
+      </NavLink>
+      <NavLink id="anime" to="/anime">
+        Anime
+      </NavLink>
+    </nav>
+  );
 }
 
 export default AppNav;

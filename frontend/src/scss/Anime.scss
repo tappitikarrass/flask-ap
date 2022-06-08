@@ -30,7 +30,7 @@
 
 #anime-info-table {
     td {
-        &.val {
+        &.value {
             width: 100%;
         }
         &.key {
@@ -42,7 +42,6 @@
 #anime-search {
     display: flex;
     flex-direction: row;
-    margin-top: 2em;
 
     & > input {
         margin: 0;
@@ -70,7 +69,8 @@
         }
 
         & > #anime-description {
-            margin: 0;
+            margin-top: 0;
+            margin-left: 0;
         }
     }
     
@@ -94,7 +94,7 @@
 
 // phone
 @media screen and (min-width: 810px) {
-    .content {
+    #page {
         width: 100vw;
         margin-left: 0;
     }
@@ -102,8 +102,8 @@
 
 // desktop and tablet
 @media screen and (min-width: 500px) {
-    .content {
-        width: 70vw;
-        margin-left: 15vw;
+    #page{
+        width: 70vw !important;
+        margin-left: 15vw !important;
     }
 }
