@@ -1,20 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import '../../scss/button.scss';
+import '../../scss/Button.scss';
 
-class Button extends React.PureComponent {
-  render() {
-    const {
-      id, buttonClass, onClick, value,
-    } = this.props;
+function Button(props) {
+  const {
+    id, buttonClass, onClick, value,
+  } = props;
 
-    return (
-      <button id={id} type="submit" className={buttonClass} onClick={onClick}>
-        {value}
-      </button>
-    );
-  }
+  return (
+    <button id={id} type="submit" className={buttonClass} onClick={onClick}>
+      {value}
+    </button>
+  );
 }
 
 Button.defaultProps = {

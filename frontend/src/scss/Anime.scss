@@ -1,0 +1,109 @@
+@use "base16" as *;
+
+#anime {
+    display: flex;
+    flex-direction: column;
+
+    & > #anime-title {
+        margin: 1em 0 1em 0;
+    }
+
+    & > #anime-info {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        & > #anime-banner {
+            height: 50vh;
+            border-radius: 1%;
+        }
+        & > #anime-info-table {
+            margin-left: 2em;
+            width: 100%;
+        }
+    }
+
+    & > #anime-description {
+        margin-top: 2em;
+    }
+}
+
+#anime-info-table {
+    td {
+        &.val {
+            width: 100%;
+        }
+        &.key {
+            text-align: right;
+        }
+    }
+}
+
+#anime-search {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2em;
+
+    & > input {
+        margin: 0;
+        margin-right: 1em;
+    }
+    & > button {
+        width: 10vw;
+    }
+}
+
+// phone and tablet
+@media screen and (max-width: 810px) {
+    #anime {
+        & > #anime-info {
+            flex-direction: column;
+            align-items: center;
+            & > #anime-banner {
+                width: 100%;
+                height: auto;
+                border-radius: 1%;
+            }
+            & > #anime-info-table {
+                margin: 2em 0 2em 0;
+            }
+        }
+
+        & > #anime-description {
+            margin: 0;
+        }
+    }
+    
+    #anime-search {
+        & > button {
+            margin-top: 1em;
+        }
+    }
+}
+
+// phone and tablet
+@media screen and (max-width: 810px) {
+    #anime-search {
+        flex-direction: column;
+
+        & > button {
+            width: 100%;
+        }
+    }
+}
+
+// phone
+@media screen and (min-width: 810px) {
+    .content {
+        width: 100vw;
+        margin-left: 0;
+    }
+}
+
+// desktop and tablet
+@media screen and (min-width: 500px) {
+    .content {
+        width: 70vw;
+        margin-left: 15vw;
+    }
+}
