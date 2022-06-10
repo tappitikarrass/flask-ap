@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from './UIParts/Button';
 import '../scss/Profile.scss';
 
 class Profile extends React.PureComponent {
@@ -30,9 +29,9 @@ class Profile extends React.PureComponent {
           </tr>
         </table>
         <div className="fields-row">
-          <Button value="Edit" buttonClass="bt-blue" />
+          { /* <Button value="Edit" buttonClass="bt-blue" />
           <Button value="Delete" buttonClass="bt-red" />
-          <Button value="Logout" buttonClass="bt-green-end" />
+          <Button value="Logout" buttonClass="bt-green-end" /> */ }
         </div>
       </div>
     );

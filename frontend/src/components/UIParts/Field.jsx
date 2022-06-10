@@ -6,7 +6,7 @@ import '../../scss/Field.scss';
 
 function Field(props) {
   const {
-    id, fieldClass, onSubmit, placeholder, type,
+    id, fieldClass, onSubmit, placeholder, type, limit, name,
   } = props;
 
   const [value, setValue] = useState('');
@@ -24,6 +24,8 @@ function Field(props) {
       value={value}
       onSubmit={onSubmit}
       onChange={handleChange}
+      limit={limit}
+      name={name}
     />
   );
 }
@@ -32,8 +34,10 @@ Field.defaultProps = {
   fieldClass: 'field-end',
   onSubmit: null,
   id: '',
+  name: '',
   placeholder: 'Input',
   type: 'text',
+  limit: 256,
 };
 
 Field.propTypes = {
@@ -42,6 +46,8 @@ Field.propTypes = {
   id: PropTypes.string,
   type: PropTypes.string,
   placeholder: PropTypes.string,
+  limit: PropTypes.number,
+  name: PropTypes.string,
 };
 
 export default Field;

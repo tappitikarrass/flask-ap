@@ -10,6 +10,8 @@ import { createGlobalStyle } from 'styled-components';
 import AppNav from './components/AppNav';
 import Homepage from './components/Homepage';
 import Profile from './components/Profile';
+import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
 import Anime from './components/Anime';
 import Footer from './components/Footer';
 
@@ -39,6 +41,8 @@ root.render(
           <Route path="/" element={<Homepage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/anime" element={<Anime />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<SignIn />} />
         </Routes>
       </div>
       <Footer />

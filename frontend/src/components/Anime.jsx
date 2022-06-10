@@ -1,27 +1,17 @@
-import React from 'react';
-import Button from './UIParts/Button';
-import Field from './UIParts/Field';
+import React, { useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import '../scss/Anime.scss';
 import '../scss/UI.scss';
 
 function AnimeSearch() {
-  async function searchAnime() {
-    const queryString = encodeURIComponent(
-      document.getElementById('anime-search-bar').value,
-    );
-    const url = 'http://localhost/backend/anime/search/';
-    const response = await fetch(
-      url,
-      {
-        method: 'POST',
-        header: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ query: queryString }),
-      },
-    );
-    const animeData = await response.json();
+  const searchForm = useRef();
 
+  const {
+    register,
+    handleSubmit,
+  } = useForm();
+
+  function loadAnime(animeData) {
     document.getElementById('anime-title').innerHTML = animeData.title;
     document.getElementById('score').innerHTML = animeData.score;
     document.getElementById('anime-banner').src = animeData.image_url;
@@ -39,10 +29,57 @@ function AnimeSearch() {
     }
   }
 
+  async function onSubmit() {
+    const queryData = new FormData(searchForm.current);
+    const queryDataJson = JSON.stringify(Object.fromEntries(queryData));
+
+    const response = await fetch(
+      'http://localhost/backend/anime/search/',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: queryDataJson,
+      },
+    );
+
+    const animeData = await response.json();
+    if (response.status === 200) {
+      loadAnime(animeData);
+      document.getElementById('anime-title').style.display = 'inline';
+      document.getElementById('anime-info').style.display = 'flex';
+      document.getElementById('anime-description').style.display = 'flex';
+
+      document.getElementById('msg-error').style.display = 'none';
+    }
+    if (response.status === 400) {
+      document.getElementById('msg-error').style.display = 'inline';
+
+      document.getElementById('anime-title').style.display = 'none';
+      document.getElementById('anime-info').style.display = 'none';
+      document.getElementById('anime-description').style.display = 'none';
+    }
+  }
+
   return (
     <div id="anime-search" className="ui-row">
-      <Field id="anime-search-bar" fieldClass="field" type="search" placeholder="Search" />
-      <Button id="anime-search-bt" buttonClass="bt-blue-end" value="Search" onClick={() => searchAnime()} />
+      <form
+        id="anime-search-form"
+        ref={searchForm}
+        method="post"
+        onSubmit={handleSubmit(onSubmit)}
+        acceptCharset="utf-8"
+      >
+        <input
+          id="anime-search-bar"
+          {...register('query')}
+          className="field"
+          type="search"
+          placeholder="Search"
+        />
+        <button id="anime-search-bt" type="submit" className="bt-blue-end">Search</button>
+      </form>
     </div>
   );
 }
@@ -86,6 +123,7 @@ function Anime() {
   return (
     <div id="anime" className="content">
       <AnimeSearch />
+      <p id="msg-error">Not found!</p>
       <h2 id="anime-title">Title</h2>
       <div id="anime-info">
         <img id="anime-banner" alt="anime-banner" />

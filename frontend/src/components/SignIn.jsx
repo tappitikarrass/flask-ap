@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from './UIParts/Button';
 
 class SignIn extends React.PureComponent {
   render() {
@@ -21,7 +20,7 @@ class SignIn extends React.PureComponent {
             className="field"
             required
           />
-          <Button value="Sign In" buttonClass="bt-blue" />
+          { /* <Button value="Sign In" buttonClass="bt-blue" /> */ }
         </form>
       </div>
     );
