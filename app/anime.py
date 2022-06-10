@@ -49,14 +49,10 @@ def anime_by_id(mal_id):
 @bp_anime.route("/anime/search/", methods=["POST"])
 # @jwt_required()
 def anime_search():
-    query = get_json_field(request.get_json(), "query")
+    query = get_json_field(request, "query")
     try:
         results = cli.anime_search(query=query, limit=1, fields=["id"])
         for result in results:
             return anime_by_id(result.id)
     except Exception:
         return jsonify("400"), 400
-
-@bp_anime.route("/hello", methods=["GET"])
-def hello():
-    return jsonify("hello"), 200

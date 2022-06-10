@@ -1,14 +1,22 @@
 @use "main";
 
-.content {
+#signin {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
+#signin-form p {
+    margin-top: 0.5em;
+}
+
+#login-bt {
+    margin-top: 1em;
+}
+
 // desktop
 @media screen and (min-width: 810px) {
-  .content {
+  #page {
     width: 30vw;
     margin-left: 35vw;
   }
@@ -16,7 +24,7 @@
 
 // tablet
 @media screen and (min-width: 500px) and (max-width: 810px) {
-  .content {
+  #page {
     width: 50vw;
     margin-left: 25vw;
   }

@@ -27,7 +27,8 @@ function SignUp() {
     const userData = new FormData(signUpForm.current);
     const userDataJson = JSON.stringify(Object.fromEntries(userData));
 
-    const response = await fetch(
+    // const response =
+    await fetch(
       'http://localhost/backend/user',
       {
         method: 'POST',
@@ -37,12 +38,10 @@ function SignUp() {
         body: userDataJson,
       },
     );
-    if (response.status === 400) {
-      console.log('already registered');
-    }
-    if (response.status === 200) {
-      console.log('ok');
-    }
+    // if (response.status === 400) {
+    // }
+    // if (response.status === 200) {
+    // }
   }
 
   return (
