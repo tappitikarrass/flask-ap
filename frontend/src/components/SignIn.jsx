@@ -1,8 +1,12 @@
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import { useForm } from 'react-hook-form';
 import '../scss/SignIn.scss';
 
 function SignIn() {
+  const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies(['token', 'username']);
   const loginForm = useRef();
   const {
     register,
@@ -10,10 +14,10 @@ function SignIn() {
     formState: { errors },
   } = useForm(
     {
-      // defaultValues: {
-      //   username: 'asket',
-      //   password: '12345678',
-      // },
+      defaultValues: {
+        username: 'asket',
+        password: '12345678',
+      },
     },
   );
 
@@ -30,7 +34,30 @@ function SignIn() {
         },
       },
     );
-    console.log(await response.json());
+    if (response.status === 200) {
+      if (cookies.token != null) {
+        removeCookie('token');
+        removeCookie('username');
+      }
+      const tokenJson = await response.json();
+      setCookie(
+        'token',
+        tokenJson.token,
+        {
+          path: '/',
+          sameSite: 'Lax',
+        },
+      );
+      setCookie(
+        'username',
+        userData.get('username'),
+        {
+          path: '/',
+          sameSite: 'Lax',
+        },
+      );
+      navigate('/profile');
+    }
   }
 
   return (

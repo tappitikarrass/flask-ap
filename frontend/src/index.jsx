@@ -11,6 +11,7 @@ import AppNav from './components/AppNav';
 import Homepage from './components/Homepage';
 import Profile from './components/Profile';
 import SignUp from './components/SignUp';
+import ProfileEdit from './components/ProfileEdit';
 import SignIn from './components/SignIn';
 import Anime from './components/Anime';
 import Footer from './components/Footer';
@@ -40,6 +41,7 @@ root.render(
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/edit" element={<ProfileEdit />} />
           <Route path="/anime" element={<Anime />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<SignIn />} />

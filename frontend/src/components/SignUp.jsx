@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import '../scss/UI.scss';
 import '../scss/SignUp.scss';
 
 function SignUp() {
+  const navigate = useNavigate();
   const signUpForm = useRef();
   const {
     register,
@@ -27,8 +29,7 @@ function SignUp() {
     const userData = new FormData(signUpForm.current);
     const userDataJson = JSON.stringify(Object.fromEntries(userData));
 
-    // const response =
-    await fetch(
+    const response = await fetch(
       'http://localhost/backend/user',
       {
         method: 'POST',
@@ -40,8 +41,9 @@ function SignUp() {
     );
     // if (response.status === 400) {
     // }
-    // if (response.status === 200) {
-    // }
+    if (response.status === 200) {
+      navigate('/login');
+    }
   }
 
   return (

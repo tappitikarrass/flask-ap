@@ -63,7 +63,10 @@ function AnimeSearch() {
   }
 
   return (
-    <div id="anime-search" className="ui-row">
+    <div
+      id="anime-search"
+      className="ui-row"
+    >
       <form
         id="anime-search-form"
         ref={searchForm}
@@ -78,7 +81,13 @@ function AnimeSearch() {
           type="search"
           placeholder="Search"
         />
-        <button id="anime-search-bt" type="submit" className="bt-blue-end">Search</button>
+        <button
+          id="anime-search-bt"
+          type="submit"
+          className="bt-blue-end"
+        >
+          Search
+        </button>
       </form>
     </div>
   );
