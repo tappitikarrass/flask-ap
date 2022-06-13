@@ -12,7 +12,6 @@
     "react-dom": "^18.1.0",
     "react-fetch-hook": "^1.9.5",
     "react-hook-form": "^7.31.3",
-    "react-notifications-component": "^4.0.1",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",

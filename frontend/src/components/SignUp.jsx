@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import Notify from './Notify';
 
 import '../scss/UI.scss';
 import '../scss/SignUp.scss';
@@ -47,8 +48,12 @@ function SignUp() {
         body: userDataJson,
       },
     );
-    // if (response.status === 400) {
-    // }
+    if (response.status === 400) {
+      document.getElementById('signup-error').style.opacity = 1;
+      setTimeout(() => {
+        document.getElementById('signup-error').style.opacity = 0;
+      }, 2000);
+    }
     if (response.status === 200) {
       navigate('/login');
     }
@@ -56,6 +61,12 @@ function SignUp() {
 
   return (
     <div id="signup" className="content">
+      <Notify
+        id="signup-error"
+        type="error"
+        title="Sign-up error"
+        msg="User with such email or username already exists"
+      />
       <h2>Sing Up</h2>
       <form
         id="signup-form"
