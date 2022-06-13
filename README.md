@@ -1,6 +1,7 @@
 ## Anime catalogue SPA build with Flask and ReactJS
 
 #### Deploy on GNU/Linux
+1. [Build React frontend](#build-react-frontend)
 1. Install `docker` and `make`.
 1. Clone this repo.
 1. Run `make up` inside the cloned repo to build docker image and create containers.
@@ -15,6 +16,10 @@
 1. From now on WSGI wll be reloaded each time you make changes to backend.
 
 Source tree is mounted into container. So, it is synced with container no matter where you make changes.
+
+#### Build react frontend
+1. Install `nodejs` and `npm`.
+1. Cd into `frontend` and run `npm run build`
 
 #### Configure pgAmdin4 and connect to PostgreSQL
 1. Run `make login-info`. It will print login information for Postgres and pgAdmin4.
@@ -32,7 +37,7 @@ For more information check Makefile, it speaks for itself.
 | react frontend              | [localhost:80/](localhost:80/)                               |
 | pure js frontend            | [localhost:80/purejsfrontend/](localhost:80/purejsfrontend/) |
 | pgadmin4                    | [localhost:80/pgadmin4/](localhost:80/pgadmin4/)             |
-| backend(gunicorn/flask run) | [localhost:80](localhost:80/backend/)                        |
+| backend(gunicorn/flask run) | [localhost:80/backend](localhost:80/backend/)                        |
 
 #### LICENSE
 [BSD-3-Clause License](LICENSE)
