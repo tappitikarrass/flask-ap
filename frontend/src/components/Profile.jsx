@@ -5,7 +5,7 @@ import '../scss/Profile.scss';
 
 function Profile() {
   const [userData, setUserData] = useState([]);
-  const [cookies, removeCookie] = useCookies(['token', 'username']);
+  const [cookies, removeCookie] = useCookies(['token', 'username', 'user_id']);
   const navigate = useNavigate();
 
   async function logOut() {
@@ -26,6 +26,7 @@ function Profile() {
     if (response.status === 200) {
       removeCookie('token');
       removeCookie('username');
+      removeCookie('user_id');
       navigate('/login');
     }
   }

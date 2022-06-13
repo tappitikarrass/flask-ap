@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import '../scss/Homepage.scss';
 
 function Homepage() {
-  const [cookies, setCookie] = useCookies(['token', 'username']);
+  const [cookies, setCookie] = useCookies(['token', 'username', 'user_id']);
 
   useEffect(() => {
     if (cookies.token == null) {
@@ -24,12 +24,20 @@ function Homepage() {
           sameSite: 'Lax',
         },
       );
+      setCookie(
+        'user_id',
+        'undefined',
+        {
+          path: '/',
+          sameSite: 'Lax',
+        },
+      );
     }
   });
 
   return (
     <div id="homepage" className="content">
-      <p>homepage</p>
+      <h2>Anime catalogue SPA build with Flask and ReactJS</h2>
     </div>
   );
 }

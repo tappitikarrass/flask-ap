@@ -1,0 +1,38 @@
+@use "base16" as *;
+
+#user-lists.content {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+
+// desktop
+@media screen and (min-width: 810px) {
+    #user-lists.content {
+        width: 70vw;
+        margin-left: 15vw;
+    }
+    #create-list-bt {
+        width: 15vw;
+    }
+}
+
+// tablet
+@media screen and (min-width: 500px) and (max-width: 810px) {
+    #user-lists.content {
+        width: 100vw;
+        margin-left: 0vw;
+    }
+    #create-list-bt {
+        width: 15vw;
+    }
+}
+
+// phone
+@media screen and (max-width: 500px) {
+    #user-lists.content {
+        width: 100vw;
+        margin-left: 0;
+    }
+}

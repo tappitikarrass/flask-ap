@@ -30,6 +30,7 @@ def get_lists_by_username(username):
         return jsonify(403), 403
 
     user_lists = get_entries(List)
+
     return user_lists, 200
 
 @bp_list.route("/list", methods=["POST"])
@@ -83,7 +84,9 @@ def list_by_id(username, list_id):
                 return jsonify(400), 400
         return entry_by_id("post", ListAnime, 0, **anime_data), 200
     if request.method == "GET":
-        return list, 200
+        anime_list = get_entries(ListAnime)
+        return anime_list, 200
+        # return list, 200
     if request.method == "PUT":
         list_data = ListSchema().load(request.get_json())
         return entry_by_id("put", List, list_id, **list_data), 200

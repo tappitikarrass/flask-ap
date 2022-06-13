@@ -9,7 +9,7 @@ pytest:
 sh:
 	@sudo docker-compose exec -it web sh
 up:
-	@sudo docker-compose up
+	@sudo docker-compose up --attach web
 down:
 	@sudo docker-compose down
 db-init:

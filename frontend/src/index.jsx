@@ -16,6 +16,8 @@ import SignIn from './components/SignIn';
 import Anime from './components/Anime';
 import UsersList from './components/UsersList';
 import Footer from './components/Footer';
+import UserLists from './components/UserLists';
+import AnimeList from './components/AnimeList';
 
 import './scss/UI.scss';
 
@@ -32,11 +34,13 @@ root.render(
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/lists" element={<UserLists />} />
           <Route path="/profile/edit" element={<ProfileEdit />} />
-          <Route path="/anime" element={<Anime />} />
+          <Route path="/anime/:malId" element={<Anime />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<SignIn />} />
           <Route path="/admin/users" element={<UsersList />} />
+          <Route path="/list/:listId" element={<AnimeList />} />
         </Routes>
       </div>
       <Footer />

@@ -1,10 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import '../scss/Anime.scss';
 
 function AnimeSearch() {
+  const { malId } = useParams();
   const searchForm = useRef();
   const navigate = useNavigate();
   const [cookies] = useCookies(['token', 'username']);
@@ -13,12 +14,6 @@ function AnimeSearch() {
     register,
     handleSubmit,
   } = useForm();
-
-  useEffect(() => {
-    if (cookies.token === 'undefined') {
-      navigate('/login');
-    }
-  });
 
   function loadAnime(animeData) {
     document.getElementById('anime-title').innerHTML = animeData.title;
@@ -37,6 +32,42 @@ function AnimeSearch() {
       document.getElementById('duration-key').innerHTML = 'Average episode duration:';
     }
   }
+
+  useEffect(() => {
+    async function effect() {
+      const response = await fetch(
+        `http://localhost/backend/anime/${malId}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${cookies.token}`,
+          },
+        },
+      );
+      const animeData = await response.json();
+      if (response.status === 200) {
+        loadAnime(animeData);
+        document.getElementById('anime-title').style.display = 'inline';
+        document.getElementById('anime-info').style.display = 'flex';
+        document.getElementById('anime-description').style.display = 'flex';
+
+        document.getElementById('msg-error').style.display = 'none';
+      }
+      if (response.status === 400) {
+        document.getElementById('msg-error').style.display = 'inline';
+
+        document.getElementById('anime-title').style.display = 'none';
+        document.getElementById('anime-info').style.display = 'none';
+        document.getElementById('anime-description').style.display = 'none';
+      }
+    }
+
+    if (cookies.token === 'undefined') {
+      navigate('/login');
+    } else {
+      effect();
+    }
+  });
 
   async function onSubmit() {
     const queryData = new FormData(searchForm.current);

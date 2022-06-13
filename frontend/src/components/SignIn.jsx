@@ -7,7 +7,12 @@ import '../scss/SignIn.scss';
 
 function SignIn() {
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(['token', 'username']);
+  const [
+    cookies,
+    setCookie,
+    removeCookie,
+  ] = useCookies(['token', 'username', 'user_id']);
+
   const loginForm = useRef();
   const {
     register,
@@ -65,6 +70,28 @@ function SignIn() {
           sameSite: 'Lax',
         },
       );
+
+      // set user id
+      const userResponse = await fetch(
+        `http://localhost/backend/user/${userData.get('username')}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${tokenJson.token}`,
+          },
+        },
+      );
+      const userJson = await userResponse.json();
+
+      setCookie(
+        'user_id',
+        userJson.user_id,
+        {
+          path: '/',
+          sameSite: 'Lax',
+        },
+      );
+
       navigate('/profile');
     } else {
       document.getElementById('login-error').style.opacity = 1;
