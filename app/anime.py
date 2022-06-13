@@ -25,7 +25,7 @@ class AnimeObj():
         self.image_url = image_url
 
 @bp_anime.route("/anime/<int:mal_id>", methods=["GET"])
-# @jwt_required()
+@jwt_required()
 def anime_by_id(mal_id):
     try:
         cli.anime_fields = Field.all_anime();
@@ -47,7 +47,7 @@ def anime_by_id(mal_id):
         return jsonify("400"), 400
 
 @bp_anime.route("/anime/search/", methods=["POST"])
-# @jwt_required()
+@jwt_required()
 def anime_search():
     query = get_json_field(request, "query")
     try:

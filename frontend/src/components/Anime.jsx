@@ -48,6 +48,7 @@ function AnimeSearch() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookies.token}`,
         },
         body: queryDataJson,
       },
