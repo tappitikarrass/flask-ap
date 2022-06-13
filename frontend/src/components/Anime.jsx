@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import '../scss/Anime.scss';
-import '../scss/UI.scss';
 
 function AnimeSearch() {
   const searchForm = useRef();

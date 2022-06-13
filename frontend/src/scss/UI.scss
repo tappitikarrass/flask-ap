@@ -1,5 +1,56 @@
 @use "base16" as *;
+@use "fonts";
 
+// globals
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "IBMPlex Sans", sans-serif;
+    background-color: black;
+    color: $base07;
+    transition: width 0.2s, height 0.2s, margin 0.2s;
+    transition-timing-function: ease-out;
+}
+
+::selection {
+    background-color: $base03;
+}
+
+.content {
+    background-color: $base00;
+
+    padding: 2em 5vw 2em 5vw;
+    padding-top: 2em;
+    padding-bottom: 2em;
+
+    border-radius: 2px;
+    box-sizing: border-box;
+    border-left: 1px solid $base02;
+    border-right: 1px solid $base02;
+
+    min-height: 85vh;
+}
+
+
+h2 {
+    text-align: center;
+    margin: 0 0 1em 0;
+}
+
+// table
+table,
+td,
+th {
+    border: 1px solid $base02;
+    border-collapse: collapse;
+}
+
+td,
+th {
+    padding: 1em;
+}
+
+// misc
 form {
     display: flex;
     flex-direction: column;
@@ -10,7 +61,7 @@ p:empty {
     display: none;
 }
 
-// groups
+// ui groups
 .ui-row {
   display: flex;
   flex-direction: row;
@@ -27,7 +78,6 @@ p:empty {
   border-radius: 3px;
   box-sizing: border-box;
   padding: 1em;
-  // margin-top: 1em;
   margin-right: 1em;
   outline: none;
 }
@@ -98,7 +148,32 @@ p:empty {
 }
 
 @media screen and (max-width: 500px) {
+}
+
+// default content size
+// desktop
+@media screen and (min-width: 810px) {
+    .content {
+        width: 50vw;
+        margin-left: 25vw;
+    }
+}
+
+// tablet
+@media screen and (min-width: 500px) and (max-width: 810px) {
+    .content {
+        width: 70vw;
+        margin-left: 15vw;
+    }
+}
+
+// phone
+@media screen and (max-width: 500px) {
+    .content {
+        border: none;
+    }
     .ui-row {
+        flex-direction: column;
         gap: 1em;
     }
 }

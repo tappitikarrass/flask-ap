@@ -21,6 +21,9 @@ function AppNav() {
       <NavLink id="anime" to="/anime">
         Anime
       </NavLink>
+      <NavLink id="users-list" to="/admin/users">
+        Users List
+      </NavLink>
     </nav>
   );
 }

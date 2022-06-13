@@ -14,21 +14,12 @@ import SignUp from './components/SignUp';
 import ProfileEdit from './components/ProfileEdit';
 import SignIn from './components/SignIn';
 import Anime from './components/Anime';
+import UsersList from './components/UsersList';
 import Footer from './components/Footer';
 
-import './scss/main.scss';
+import './scss/UI.scss';
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    padding: 0;
-  }
-
-  .content {
-    padding: 0;
-    padding-top: 2em;
-    padding-bottom: 2em;
-  }
 `;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -45,6 +36,7 @@ root.render(
           <Route path="/anime" element={<Anime />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<SignIn />} />
+          <Route path="/admin/users" element={<UsersList />} />
         </Routes>
       </div>
       <Footer />

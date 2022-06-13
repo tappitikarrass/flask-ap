@@ -1,10 +1,8 @@
 @use "base16" as *;
 
-
-#profile {
+#profile.content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 #bt-row.ui-row {
@@ -24,9 +22,6 @@ th {
 @media screen and (max-width: 500px) {
     th {
         width: 25vw;
-    }
-    #bt-row {
-        gap: 1em;
     }
 }
 

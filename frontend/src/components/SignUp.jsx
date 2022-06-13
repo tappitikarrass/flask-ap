@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
 import '../scss/UI.scss';
@@ -7,6 +8,7 @@ import '../scss/SignUp.scss';
 
 function SignUp() {
   const navigate = useNavigate();
+  const [cookies] = useCookies(['token', 'username']);
   const signUpForm = useRef();
   const {
     register,
@@ -24,6 +26,12 @@ function SignUp() {
       },
     },
   );
+
+  useEffect(() => {
+    if (cookies.token !== 'undefined') {
+      navigate('/profile');
+    }
+  });
 
   async function onSubmit() {
     const userData = new FormData(signUpForm.current);

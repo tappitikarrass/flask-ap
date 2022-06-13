@@ -47,6 +47,8 @@ function Profile() {
     );
 
     if (response.status === 200) {
+      removeCookie('token');
+      removeCookie('username');
       navigate('/login');
     }
   }

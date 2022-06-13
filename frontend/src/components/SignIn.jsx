@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useForm } from 'react-hook-form';
+import Notify from './Notify';
 import '../scss/SignIn.scss';
 
 function SignIn() {
@@ -21,9 +22,18 @@ function SignIn() {
     },
   );
 
+  useEffect(() => {
+    console.log(cookies.token);
+    if (cookies.token !== 'undefined') {
+      navigate('/profile');
+    }
+  });
+
   async function onSubmit() {
     const userData = new FormData(loginForm.current);
-    const encodedCreds = window.btoa(`${userData.get('username')}:${userData.get('password')}`).toString('base64');
+    const encodedCreds = window.btoa(
+      `${userData.get('username')}:${userData.get('password')}`,
+    ).toString('base64');
     const response = await fetch(
       'http://localhost/backend/login',
       {
@@ -57,11 +67,22 @@ function SignIn() {
         },
       );
       navigate('/profile');
+    } else {
+      document.getElementById('login-error').style.opacity = 1;
+      setTimeout(() => {
+        document.getElementById('login-error').style.opacity = 0;
+      }, 2000);
     }
   }
 
   return (
     <div id="signin" className="content">
+      <Notify
+        id="login-error"
+        type="error"
+        title="Login error"
+        msg="Wrong username or password"
+      />
       <h2>Sign In</h2>
       <form
         id="signin-form"
