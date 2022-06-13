@@ -1,14 +1,24 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import '../scss/Anime.scss';
 
 function AnimeSearch() {
   const searchForm = useRef();
+  const navigate = useNavigate();
+  const [cookies] = useCookies(['token', 'username']);
 
   const {
     register,
     handleSubmit,
   } = useForm();
+
+  useEffect(() => {
+    if (cookies.token === 'undefined') {
+      navigate('/login');
+    }
+  });
 
   function loadAnime(animeData) {
     document.getElementById('anime-title').innerHTML = animeData.title;

@@ -23,7 +23,6 @@ function SignIn() {
   );
 
   useEffect(() => {
-    console.log(cookies.token);
     if (cookies.token !== 'undefined') {
       navigate('/profile');
     }

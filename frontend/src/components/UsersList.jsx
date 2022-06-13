@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 import '../scss/UsersList.scss';
 
 function UsersList() {
+  const navigate = useNavigate();
   const [cookies] = useCookies('token', 'username');
   const [users, setUsers] = useState([]);
   const [reqStatus, setReqStatus] = useState();
@@ -22,7 +24,11 @@ function UsersList() {
       setUsers(json);
       setReqStatus(response.status);
     }
-    effect();
+    if (cookies.token === 'undefined') {
+      navigate('/login');
+    } else {
+      effect();
+    }
   }, []);
 
   if (reqStatus === 200) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {
-  BrowserRouter,
+  HashRouter,
   Routes,
   Route,
 } from 'react-router-dom';
@@ -26,7 +26,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <AppNav />
       <div id="page">
         <Routes>
@@ -40,7 +40,7 @@ root.render(
         </Routes>
       </div>
       <Footer />
-    </BrowserRouter>
+    </HashRouter>
     <GlobalStyle />
   </React.StrictMode>,
 );

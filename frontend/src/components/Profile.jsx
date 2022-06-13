@@ -66,7 +66,11 @@ function Profile() {
       );
       setUserData(await response.json());
     }
-    effect();
+    if (cookies.token === 'undefined') {
+      navigate('/login');
+    } else {
+      effect();
+    }
   });
 
   return (
