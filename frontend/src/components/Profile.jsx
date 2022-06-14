@@ -8,6 +8,7 @@ function Profile() {
   const [cookies, removeCookie] = useCookies(['token', 'username', 'user_id']);
   const navigate = useNavigate();
 
+  /* istanbul ignore next */
   async function logOut() {
     if (cookies.token == null) {
       return;
@@ -22,7 +23,7 @@ function Profile() {
         },
       },
     );
-
+    /* istanbul ignore next */
     if (response.status === 200) {
       removeCookie('token');
       removeCookie('username');
@@ -31,6 +32,7 @@ function Profile() {
     }
   }
 
+  /* istanbul ignore next */
   async function deleteUser() {
     if (cookies.token == null) {
       return;
@@ -65,8 +67,10 @@ function Profile() {
           },
         },
       );
+      /* istanbul ignore next */
       setUserData(await response.json());
     }
+    /* istanbul ignore next */
     if (cookies.token === 'undefined') {
       navigate('/login');
     } else {
@@ -115,7 +119,10 @@ function Profile() {
         <button
           type="submit"
           className="bt-blue"
-          onClick={() => { navigate('/profile/edit'); }}
+          onClick={() => { 
+            /* istanbul ignore next */
+            navigate('/profile/edit');
+          }}
         >
           Edit
         </button>

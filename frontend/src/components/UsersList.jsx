@@ -20,10 +20,14 @@ function UsersList() {
           },
         },
       );
+      /* istanbul ignore next */
       const json = await response.json();
+      /* istanbul ignore next */
       setUsers(json);
+      /* istanbul ignore next */
       setReqStatus(response.status);
     }
+    /* istanbul ignore if */
     if (cookies.token === 'undefined') {
       navigate('/login');
     } else {
@@ -31,6 +35,7 @@ function UsersList() {
     }
   }, []);
 
+  /* istanbul ignore if */
   if (reqStatus === 200) {
     return (
       <div id="users-list" className="content">
@@ -61,6 +66,7 @@ function UsersList() {
       </div>
     );
   }
+  /* istanbul ignore if */
   if (reqStatus !== 200) {
     return (
       <div id="users-list" className="content">

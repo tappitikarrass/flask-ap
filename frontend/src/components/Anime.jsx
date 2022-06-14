@@ -15,6 +15,7 @@ function AnimeSearch() {
     handleSubmit,
   } = useForm();
 
+  /* istanbul ignore next */
   function loadAnime(animeData) {
     document.getElementById('anime-title').innerHTML = animeData.title;
     document.getElementById('score').innerHTML = animeData.score;
@@ -34,6 +35,7 @@ function AnimeSearch() {
   }
 
   useEffect(() => {
+    /* istanbul ignore next */
     async function effect() {
       const response = await fetch(
         `http://localhost/backend/anime/${malId}`,
@@ -45,6 +47,7 @@ function AnimeSearch() {
         },
       );
       const animeData = await response.json();
+      /* istanbul ignore if */
       if (response.status === 200) {
         loadAnime(animeData);
         document.getElementById('anime-title').style.display = 'inline';
@@ -62,6 +65,7 @@ function AnimeSearch() {
       }
     }
 
+    /* istanbul ignore if */
     if (cookies.token === 'undefined') {
       navigate('/login');
     } else {
@@ -69,6 +73,7 @@ function AnimeSearch() {
     }
   });
 
+  /* istanbul ignore next */
   async function onSubmit() {
     const queryData = new FormData(searchForm.current);
     const queryDataJson = JSON.stringify(Object.fromEntries(queryData));

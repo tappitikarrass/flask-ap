@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserLists  1`] = `
+<div
+  className="content"
+  id="user-lists"
+>
+  <form
+    acceptCharset="utf-8"
+    id="create-list"
+    method="post"
+    onSubmit={[Function]}
+  >
+    <div
+      className="ui-row"
+    >
+      <input
+        className="field"
+        name="listname"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="List name"
+        type="text"
+      />
+      <button
+        className="bt-blue-end"
+        id="create-list-bt"
+        type="submit"
+      >
+        Create
+      </button>
+    </div>
+  </form>
+  <p />
+  <table
+    id="lists-table"
+  >
+    <tbody>
+      <tr>
+        <td>
+          #
+        </td>
+        <td>
+          Name
+        </td>
+        <td />
+        <td />
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

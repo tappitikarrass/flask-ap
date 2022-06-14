@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUp  1`] = `
+<div
+  className="content"
+  id="signup"
+>
+  <div
+    className="notify-error"
+    id="signup-error"
+  >
+    <div
+      className="notify-text"
+    >
+      <h3
+        className="notify-title"
+      >
+        Sign-up error
+      </h3>
+      <p
+        className="notify-description"
+      >
+        User with such email or username already exists
+      </p>
+    </div>
+  </div>
+  <h2>
+    Sing Up
+  </h2>
+  <form
+    acceptCharset="utf-8"
+    id="signup-form"
+    method="post"
+    onSubmit={[Function]}
+  >
+    <input
+      className="field-end"
+      id="username"
+      name="username"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Username"
+    />
+    <p />
+    <div
+      className="ui-row"
+    >
+      <input
+        className="field"
+        id="firstname"
+        name="firstname"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="Firstname"
+      />
+      <input
+        className="field-end"
+        id="lastname"
+        name="lastname"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="Lastname"
+      />
+    </div>
+    <p />
+    <p />
+    <input
+      className="field-end"
+      id="email"
+      name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Email"
+      type="email"
+    />
+    <p />
+    <input
+      className="field-end"
+      id="phone"
+      name="phone"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Phone"
+    />
+    <p />
+    <input
+      className="field-end"
+      id="password"
+      name="password"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Password"
+      type="password"
+    />
+    <p />
+    <button
+      className="bt-blue"
+      id="signup-bt"
+      type="submit"
+    >
+      Sign Up
+    </button>
+  </form>
+</div>
+`;

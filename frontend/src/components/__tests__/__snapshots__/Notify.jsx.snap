@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Notify  1`] = `
+<div
+  className="notify-msg"
+  id="notification"
+>
+  <div
+    className="notify-text"
+  >
+    <h3
+      className="notify-title"
+    >
+      Title
+    </h3>
+    <p
+      className="notify-description"
+    >
+      message
+    </p>
+  </div>
+</div>
+`;

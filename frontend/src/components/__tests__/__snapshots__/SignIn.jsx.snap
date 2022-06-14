@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignIn  1`] = `
+<div
+  className="content"
+  id="signin"
+>
+  <div
+    className="notify-error"
+    id="login-error"
+  >
+    <div
+      className="notify-text"
+    >
+      <h3
+        className="notify-title"
+      >
+        Login error
+      </h3>
+      <p
+        className="notify-description"
+      >
+        Wrong username or password
+      </p>
+    </div>
+  </div>
+  <h2>
+    Sign In
+  </h2>
+  <form
+    acceptCharset="utf-8"
+    id="signin-form"
+    method="post"
+    onSubmit={[Function]}
+  >
+    <input
+      className="field"
+      name="username"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Username"
+      type="text"
+    />
+    <p />
+    <input
+      className="field"
+      name="password"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Password"
+      type="password"
+    />
+    <p />
+    <button
+      className="bt-blue-end"
+      id="login-bt"
+      type="submit"
+    >
+      Login
+    </button>
+  </form>
+</div>
+`;

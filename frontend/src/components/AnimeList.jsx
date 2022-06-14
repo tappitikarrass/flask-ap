@@ -36,6 +36,7 @@ export default function AnimeList() {
     effect();
   }, []);
 
+  /* istanbul ignore next */
   async function addAnime() {
     // fetch anime mal_id
     const queryData = new FormData(addForm.current);
@@ -75,6 +76,7 @@ export default function AnimeList() {
     return json;
   }
 
+  /* istanbul ignore next */
   async function removeAnime(malId) {
     const response = await fetch(
       `http://localhost/backend/list/${cookies.username}/${listId}/${malId}`,

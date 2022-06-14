@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfileEdit  1`] = `
+<div
+  className="content"
+  id="profile-edit"
+>
+  <h2>
+    Edit Profile
+  </h2>
+  <form
+    acceptCharset="utf-8"
+    id="edit-form"
+    method="post"
+    onSubmit={[Function]}
+  >
+    <div
+      className="ui-row"
+    >
+      <input
+        className="field"
+        id="firstname"
+        name="firstname"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="First name"
+        type="text"
+      />
+      <input
+        className="field-end"
+        id="lastname"
+        name="lastname"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="Last name"
+        type="text"
+      />
+    </div>
+    <p />
+    <p />
+    <input
+      className="field"
+      id="email"
+      name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Email"
+      type="text"
+    />
+    <p />
+    <input
+      className="field"
+      id="phone"
+      name="phone"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Phone"
+      type="text"
+    />
+    <p />
+    <input
+      className="field"
+      id="password"
+      name="password"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="New password"
+      type="password"
+    />
+    <p />
+    <div
+      className="ui-row"
+    >
+      <button
+        className="bt-blue"
+        type="submit"
+      >
+        Save
+      </button>
+      <button
+        className="bt-red-end"
+        onClick={[Function]}
+        type="submit"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+`;

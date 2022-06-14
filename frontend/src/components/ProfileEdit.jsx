@@ -32,6 +32,7 @@ function ProfileEdit() {
     effect();
   });
 
+  /* istanbul ignore next */
   async function onSubmit() {
     const updateData = new FormData(editForm.current);
     const updateJson = JSON.stringify(Object.fromEntries(updateData));

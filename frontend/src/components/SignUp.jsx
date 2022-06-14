@@ -29,11 +29,13 @@ function SignUp() {
   );
 
   useEffect(() => {
+    /* istanbul ignore next */
     if (cookies.token !== 'undefined') {
       navigate('/profile');
     }
-  });
+  }, []);
 
+  /* istanbul ignore next */
   async function onSubmit() {
     const userData = new FormData(signUpForm.current);
     const userDataJson = JSON.stringify(Object.fromEntries(userData));

@@ -28,11 +28,13 @@ function SignIn() {
   );
 
   useEffect(() => {
+    /* istanbul ignore next */
     if (cookies.token !== 'undefined') {
       navigate('/profile');
     }
-  });
+  }, []);
 
+  /* istanbul ignore next */
   async function onSubmit() {
     const userData = new FormData(loginForm.current);
     const encodedCreds = window.btoa(

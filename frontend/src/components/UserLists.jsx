@@ -16,6 +16,7 @@ export default function UserLists() {
   const [lists, setLists] = useState([]);
 
   useEffect(() => {
+    /* istanbul ignore next */
     async function effect() {
       const response = await fetch(
         `http://localhost/backend/list/${cookies.username}`,
@@ -29,6 +30,7 @@ export default function UserLists() {
       const json = await response.json();
       setLists(json);
     }
+    /* istanbul ignore next */
     if (cookies.token === 'undefined') {
       navigate('/login');
     } else {
@@ -36,6 +38,7 @@ export default function UserLists() {
     }
   }, []);
 
+  /* istanbul ignore next */
   async function onSubmit() {
     const listData = new FormData(createListForm.current);
 
@@ -60,6 +63,7 @@ export default function UserLists() {
     return json;
   }
 
+  /* istanbul ignore next */
   async function deleteList(listId) {
     const response = await fetch(
       `http://localhost/backend/list/${cookies.username}/${listId}`,
@@ -132,6 +136,7 @@ export default function UserLists() {
                     className="bt-green-end"
                     type="submit"
                     onClick={() => {
+                      /* istanbul ignore next */
                       navigate(`/list/${value.list_id}`);
                     }}
                   >
@@ -144,6 +149,7 @@ export default function UserLists() {
                     className="bt-red-end"
                     type="submit"
                     onClick={() => {
+                      /* istanbul ignore next */
                       deleteList(value.list_id);
                     }}
                   >
