@@ -1,0 +1,23 @@
+@use "main";
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+// desktop
+@media screen and (min-width: 810px) {
+    .content {
+        width: 40vw;
+        margin-left: 30vw;
+    }
+}
+
+// tablet
+@media screen and (min-width: 500px) and (max-width: 810px) {
+    .content {
+        width: 60vw;
+        margin-left: 20vw;
+    }
+}

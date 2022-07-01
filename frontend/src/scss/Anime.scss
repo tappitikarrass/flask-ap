@@ -1,0 +1,118 @@
+@use "base16" as *;
+
+#anime {
+    display: flex;
+    flex-direction: column;
+
+    & > #anime-title {
+        display: none;
+        margin: 1em 0 1em 0;
+    }
+
+    & > #anime-info {
+        // display: flex;
+        display: none;
+        flex-direction: row;
+        width: 100%;
+
+        & > #anime-banner {
+            height: 50vh;
+            border-radius: 1%;
+        }
+        & > #anime-info-table {
+            margin-left: 2em;
+            width: 100%;
+        }
+    }
+
+    & > #anime-description {
+        display: none;
+        margin-top: 2em;
+    }
+}
+
+#anime-info-table {
+    td {
+        &.value {
+            width: 100%;
+        }
+        &.key {
+            text-align: right;
+        }
+    }
+}
+
+#anime-search-form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    & > button {
+        width: 10vw;
+    }
+    & > .field {
+        margin: 0;
+    }
+}
+
+#msg-error {
+    display: none;
+    margin-top: 1em;
+    text-align: center;
+    font-size: 14pt;
+}
+
+// phone and tablet
+@media screen and (max-width: 810px) {
+    #anime {
+        & > #anime-info {
+            flex-direction: column;
+            align-items: center;
+            & > #anime-banner {
+                width: 100%;
+                height: auto;
+                border-radius: 1%;
+            }
+            & > #anime-info-table {
+                margin: 2em 0 2em 0;
+            }
+        }
+
+        & > #anime-description {
+            margin-top: 0;
+            margin-left: 0;
+        }
+    }
+    
+    #anime-search {
+        & > button {
+            margin-top: 1em;
+        }
+    }
+}
+
+// phone and tablet
+@media screen and (max-width: 810px) {
+    #anime-search > form {
+        flex-direction: column;
+
+        & > button {
+            width: 100%;
+        }
+    }
+}
+
+// phone
+@media screen and (min-width: 810px) {
+    #anime.content {
+        width: 100vw;
+        margin-left: 0;
+    }
+}
+
+// desktop and tablet
+@media screen and (min-width: 500px) {
+    #anime.content {
+        width: 70vw;
+        margin-left: 15vw;
+    }
+}

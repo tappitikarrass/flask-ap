@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UsersList  1`] = `
+<div
+  className="content"
+  id="users-list"
+>
+  <h2>
+    Not allowed!
+  </h2>
+</div>
+`;

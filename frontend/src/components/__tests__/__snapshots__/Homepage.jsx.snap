@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Homepage  1`] = `
+<div
+  className="content"
+  id="homepage"
+>
+  <h2>
+    Anime catalogue SPA build with Flask and ReactJS
+  </h2>
+</div>
+`;

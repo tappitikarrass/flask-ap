@@ -1,0 +1,11 @@
+@use "base16" as *;
+
+footer {
+    background-color: $base00;
+    border-top: 1px $base02 solid;
+    color: $base04;
+    font-size: 0.8em;
+    height: 100%;
+    padding: 1.5em;
+    text-align: center;
+}

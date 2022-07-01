@@ -1,0 +1,210 @@
+@font-face {
+  font-family: "IBMPlex Mono";
+  src: url("../fonts/IBM_Plex_Mono/IBMPlexMono-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "IBMPlex Sans";
+  src: url("../fonts/IBM_Plex_Sans/IBMPlexSans-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "IBMPlex Serif";
+  src: url("../fonts/IBM_Plex_Serif/IBMPlexSerif-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "e-Ukraine";
+  src: url("../fonts/e-Ukraine/e-Ukraine-Regular.ttf") format("truetype");
+}
+* {
+  font-family: "IBMPlex Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: width 0.2s, height 0.2s, margin 0.2s;
+  transition-timing-function: ease-out;
+}
+
+::selection {
+  background-color: #585858;
+}
+
+body {
+  background-color: #181818;
+  color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-container {
+  background-color: #383838;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+}
+.nav-container > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.nav-container > a:hover, .nav-container > a:link, .nav-container > a:active, .nav-container > a:visited {
+  color: #f8f8f8;
+  text-decoration: none;
+}
+.nav-container > a:hover {
+  background-color: #585858;
+}
+
+#viewer {
+  height: 70vh;
+}
+
+.copyright {
+  background-color: #282828;
+  color: #b8b8b8;
+  font-size: 0.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  user-select: none;
+}
+
+.content {
+  padding: 0vh 5vw;
+  min-height: 86vh !important;
+  border-radius: 2px;
+  box-sizing: border-box;
+  border-left: 1px solid #383838;
+  border-right: 1px solid #383838;
+}
+
+table, td, th {
+  border: 1px solid #383838;
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: 1em;
+}
+
+h2 {
+  text-align: center;
+  user-select: none;
+  margin-bottom: 1em;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+}
+
+footer {
+  position: relative;
+}
+
+.iframe-nav-footer, nav, footer {
+  height: 7vh;
+}
+.iframe-nav-footer > iframe, nav > iframe, footer > iframe {
+  position: absolute;
+  width: 100vw;
+  height: 7vh;
+  border: none;
+}
+
+.table-bt, .table-bt-remove, .table-bt-open {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: inherit;
+  color: inherit;
+  font-size: 12pt;
+  text-align: left;
+}
+
+.table-bt-remove, .table-bt-open {
+  padding: 1em;
+}
+
+.field, .bt, .bt-blue, .bt-blue-end, .bt-green, .bt-green-end, .bt-red, .bt-red-end, .field-end {
+  width: 100%;
+  border: none;
+  border-radius: 3px;
+  box-sizing: border-box;
+  padding: 1em;
+  margin-top: 1em;
+  margin-right: 1em;
+  outline: none;
+}
+
+.field-end {
+  margin-right: 0em;
+}
+
+.fields-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.bt-hover-active:hover, .bt:hover, .bt-blue:hover, .bt-blue-end:hover, .bt-green:hover, .bt-green-end:hover, .bt-red:hover, .bt-red-end:hover {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
+}
+.bt-hover-active:active, .bt:active, .bt-blue:active, .bt-blue-end:active, .bt-green:active, .bt-green-end:active, .bt-red:active, .bt-red-end:active {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3) 0 0);
+}
+
+.bt-blue, .bt-blue-end {
+  background-color: #7cafc2;
+}
+
+.bt-green, .bt-green-end {
+  background-color: #a1b56c;
+}
+
+.bt-red, .bt-red-end {
+  background-color: #ab4642;
+}
+
+.bt-end, .bt-blue-end, .bt-green-end, .bt-red-end {
+  margin-right: 0;
+}
+
+@media screen and (min-width: 810px) {
+  .content {
+    width: 50vw;
+    margin-left: 25vw;
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 810px) {
+  .content {
+    width: 70vw;
+    margin-left: 15vw;
+  }
+}
+@media screen and (max-width: 500px) {
+  .content {
+    border: none;
+  }
+
+  .fields-row {
+    flex-direction: column;
+  }
+}
+body {
+  background-color: #282828;
+  color: #b8b8b8;
+  font-size: 0.8em;
+}
+
+.copyright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  user-select: none;
+}
+
+/*# sourceMappingURL=footer.css.map */

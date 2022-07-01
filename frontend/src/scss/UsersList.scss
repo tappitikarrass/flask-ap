@@ -1,0 +1,30 @@
+@use "base16" as *;
+
+#users-list.content {
+    display: flex;
+    flex-direction: column;
+}
+
+// desktop
+@media screen and (min-width: 810px) {
+    #users-list.content {
+        width: 90vw;
+        margin-left: 5vw;
+    }
+}
+
+// tablet
+@media screen and (min-width: 500px) and (max-width: 810px) {
+    #users-list.content {
+        width: 100vw;
+        margin-left: 0vw;
+    }
+}
+
+// phone
+@media screen and (max-width: 500px) {
+    #users-list.content {
+        width: 100vw;
+        margin-left: 0;
+    }
+}

@@ -1,0 +1,20 @@
+@use "main";
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+th {
+   text-align: right;
+   user-select: none;
+}
+
+// desktop
+@media screen and (min-width: 810px) {
+    .content {
+        width: 50vw;
+        margin-left: 25vw;
+    }
+}

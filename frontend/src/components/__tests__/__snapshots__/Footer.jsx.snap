@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer  1`] = `
+<footer>
+  © 2022 Andrii Lytvyn
+</footer>
+`;

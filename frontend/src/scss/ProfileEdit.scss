@@ -1,0 +1,17 @@
+@use "base16" as *;
+
+// desktop
+@media screen and (min-width: 810px) {
+  #profile-edit.content {
+    width: 40vw;
+    margin-left: 30vw;
+  }
+}
+
+// tablet
+@media screen and (min-width: 500px) and (max-width: 810px) {
+  #profile-edit.content {
+    width: 60vw;
+    margin-left: 20vw;
+  }
+}

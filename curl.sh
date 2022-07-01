@@ -1,6 +1,6 @@
 HOST="127.0.0.1"
-PORT="8000"
-URL="$HOST:$PORT"
+PORT="80"
+URL="$HOST:$PORT/backend/"
 
 # USER
 post_user_1() {
@@ -172,9 +172,15 @@ get_anime() {
     curl -X GET "$URL/anime/$1"
 }
 
-TOKEN1=""
-TOKEN2=""
-TOKEN3=""
+search_anime() {
+    curl -X POST "$URL/anime/search" \
+        -H 'Content-Type: application/json' \
+        -d '{"query": "Akira"}'
+}
+
+# TOKEN1=""
+# TOKEN2=""
+# TOKEN3=""
 # post_user_1
 # post_user_2
 # post_list_1 $TOKEN1
@@ -183,3 +189,4 @@ TOKEN3=""
 # login_user sbandera1 supersecret
 # login_user ivanfranko ukraina
 # remove_anime sbandera1 6 47 $TOKEN1
+search_anime

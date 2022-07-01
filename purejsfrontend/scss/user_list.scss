@@ -1,0 +1,32 @@
+@use "base16" as *;
+@use "main";
+
+table {
+    user-select: none;
+}
+
+td {
+    width: 100%;
+    padding: 0;
+
+    &:hover {
+        background-color: $base02;
+    }
+    &:active {
+        background-color: $base03;
+    }
+}
+
+td.cell-inactive {
+    &:hover, &:active {
+        background-color: inherit;
+    }
+}
+
+th {
+    text-align: left;
+}
+
+.cell-center {
+    padding: 1em;
+}

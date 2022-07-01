@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppNav  1`] = `
+<nav
+  id="app-nav"
+>
+  <a
+    aria-current="page"
+    className="active"
+    href="#/"
+    id="homepage"
+    onClick={[Function]}
+  >
+    Homepage
+  </a>
+  <a
+    className=""
+    href="#/lists"
+    id="user-lists"
+    onClick={[Function]}
+  >
+    Lists
+  </a>
+  <a
+    className=""
+    href="#/admin/users"
+    id="users-list"
+    onClick={[Function]}
+  >
+    Users List
+  </a>
+  <a
+    className=""
+    href="#/profile"
+    id="profile"
+    onClick={[Function]}
+  >
+    Profile
+  </a>
+  <a
+    className=""
+    href="#/login"
+    id="login"
+    onClick={[Function]}
+  >
+    Login
+  </a>
+  <a
+    className=""
+    href="#/signup"
+    id="signup"
+    onClick={[Function]}
+  >
+    Sign Up
+  </a>
+</nav>
+`;

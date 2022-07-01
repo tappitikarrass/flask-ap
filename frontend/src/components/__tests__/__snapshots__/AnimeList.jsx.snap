@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AnimeList  1`] = `
+<div
+  className="content"
+  id="anime-list"
+>
+  <div
+    className="ui-row"
+    id="anime-search"
+  >
+    <form
+      acceptCharset="utf-8"
+      id="anime-search-form"
+      method="post"
+      onSubmit={[Function]}
+    >
+      <input
+        className="field"
+        id="anime-search-bar"
+        name="query"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="Enter anime name"
+        type="search"
+      />
+      <button
+        className="bt-blue-end"
+        id="add-bt"
+        type="submit"
+      >
+        Add
+      </button>
+    </form>
+  </div>
+  <table
+    id="anime-table"
+  >
+    <tbody>
+      <tr>
+        <td>
+          MyAnimeList Id
+        </td>
+        <td />
+        <td />
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
