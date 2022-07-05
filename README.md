@@ -1,3 +1,14 @@
+# TODO
+- [ ] Improve backend
+  - [ ] Refactor code
+  - [ ] Add missing tests
+  - [ ] Update swagger.yml
+- [ ] Create new propper React frontend
+  - [ ] Make propers tests
+  - [ ] Use MUI or some other component library
+- [ ] Deploy project to Heroku
+- [ ] Improve README.md
+
 ## Anime catalogue SPA build with Flask and ReactJS
 
 #### Deploy on GNU/Linux
